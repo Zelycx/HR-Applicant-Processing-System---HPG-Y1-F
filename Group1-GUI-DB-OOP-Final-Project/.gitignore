@@ -1,0 +1,17 @@
+﻿# Visual Studio
+.vs/
+
+# Build folders
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+
+# VS Code
+.vscode/
+
+# Database files
+*.mdf
+*.ldf
