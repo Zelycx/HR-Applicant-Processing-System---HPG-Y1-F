@@ -1,3 +1,5 @@
+using Group1_GUI_DB_OOP_Final_Project.Forms.Shared.UserTypeSelection;
+
 namespace Group1_GUI_DB_OOP_Final_Project
 {
     internal static class Program
@@ -11,7 +13,7 @@ namespace Group1_GUI_DB_OOP_Final_Project
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            Application.Run(new UserTypeSelection());
         }
     }
 }
