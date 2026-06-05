@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\GODisGOOD\\source\\repos\\HR-Applicant-Processing-System---HPG-Y1-F\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{51CB4523-42AA-4DDA-B582-CF933C6A4DED}|Group1-GUI-DB-OOP-Final-Project\\Group1-GUI-DB-OOP-Final-Project.csproj|c:\\users\\godisgood\\source\\repos\\hr-applicant-processing-system---hpg-y1-f\\group1-gui-db-oop-final-project\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51CB4523-42AA-4DDA-B582-CF933C6A4DED}|Group1-GUI-DB-OOP-Final-Project\\Group1-GUI-DB-OOP-Final-Project.csproj|solutionrelative:group1-gui-db-oop-final-project\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\GODisGOOD\\source\\repos\\HR-Applicant-Processing-System---HPG-Y1-F\\Group1-GUI-DB-OOP-Final-Project\\Program.cs",
+              "RelativeDocumentMoniker": "Group1-GUI-DB-OOP-Final-Project\\Program.cs",
+              "ToolTip": "C:\\Users\\GODisGOOD\\source\\repos\\HR-Applicant-Processing-System---HPG-Y1-F\\Group1-GUI-DB-OOP-Final-Project\\Program.cs*",
+              "RelativeToolTip": "Group1-GUI-DB-OOP-Final-Project\\Program.cs*",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAALwCAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-03T05:31:03.445Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
