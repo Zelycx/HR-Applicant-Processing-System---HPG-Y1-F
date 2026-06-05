@@ -531,4 +531,88 @@ namespace Group1_GUI_DB_OOP_Final_Project
             parent.Controls.Add(card);
         }
     }
+    class ProfileForm : Form
+    {
+        TextBox txtFirst = null!;
+        TextBox txtLast = null!;
+        TextBox txtPhone = null!;
+        TextBox txtAddress = null!;
+        Label lblMsg = null!;
+
+        readonly DashboardForm? _dashboard;
+
+        public ProfileForm(DashboardForm? dashboard = null)
+        {
+            _dashboard = dashboard;
+            UI.StyleForm(this, "My Profile", 460, 510);
+            BuildUI();
+        }
+
+        void BuildUI()
+        {
+            var header = new Panel { Dock = DockStyle.Top, Height = 70, BackColor = UI.Primary };
+            header.Controls.Add(new Label
+            {
+                Text = "My Profile",
+                Font = UI.TitleFont,
+                ForeColor = UI.White,
+                AutoSize = true,
+                Location = new Point(24, 18)
+            });
+            Controls.Add(header);
+
+            var card = UI.MakeCard(404, 380);
+            card.Location = new Point(26, 82);
+            Controls.Add(card);
+
+            int y = 6;
+
+            void AddField(string label, ref TextBox box, string initial = "")
+            {
+                card.Controls.Add(UI.MakeLabel(label).Positioned(0, y));
+                y += 20;
+                box = UI.MakeInput();
+                box.Width = 352; box.Location = new Point(0, y); box.Text = initial;
+                card.Controls.Add(box);
+                y += 44;
+            }
+
+            AddField("First Name", ref txtFirst!, MockDB.FirstName);
+            AddField("Last Name", ref txtLast!, MockDB.LastName);
+            AddField("Phone Number", ref txtPhone!, MockDB.Phone);
+            AddField("Home Address", ref txtAddress!, MockDB.Address);
+
+            var btnSave = UI.MakeButton("SAVE CHANGES", UI.Primary, UI.White);
+            btnSave.Width = 352; btnSave.Location = new Point(0, y);
+            btnSave.Click += BtnSave_Click;
+            card.Controls.Add(btnSave);
+            y += 50;
+
+            lblMsg = UI.MakeLabel("", UI.SmallFont, UI.Accent);
+            lblMsg.Location = new Point(0, y);
+            card.Controls.Add(lblMsg);
+        }
+
+        void BtnSave_Click(object? s, EventArgs e)
+        {
+            string first = txtFirst.Text.Trim();
+            string last = txtLast.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(first) || string.IsNullOrWhiteSpace(last))
+            {
+                lblMsg.ForeColor = UI.Danger;
+                lblMsg.Text = "First and Last name are required.";
+                return;
+            }
+
+            MockDB.SaveProfile(first, last,
+                               txtPhone.Text.Trim(), txtAddress.Text.Trim());
+
+            if (_dashboard != null)
+                _dashboard.LblWelcome.Text = $"Hi, {MockDB.FirstName}!";
+
+            lblMsg.ForeColor = UI.Accent;
+            lblMsg.Text = "✔ Profile saved successfully.";
+        }
+    }
 }
