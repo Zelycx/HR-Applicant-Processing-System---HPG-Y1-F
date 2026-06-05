@@ -615,4 +615,12 @@ namespace Group1_GUI_DB_OOP_Final_Project
             lblMsg.Text = "✔ Profile saved successfully.";
         }
     }
+    static class ControlExtensions
+    {
+        public static T Positioned<T>(this T ctrl, int x, int y) where T : Control
+        {
+            ctrl.Location = new Point(x, y);
+            return ctrl;
+        }
+    }
 }
