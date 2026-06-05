@@ -267,4 +267,104 @@ namespace Group1_GUI_DB_OOP_Final_Project
             }
         }
     }
+    class RegistrationForm : Form
+    {
+        TextBox txtFirst = null!;
+        TextBox txtLast = null!;
+        TextBox txtEmail = null!;
+        TextBox txtPwd = null!;
+        TextBox txtConfirm = null!;
+        Label lblMsg = null!;
+
+        public RegistrationForm()
+        {
+            UI.StyleForm(this, "Applicant Portal – Register", 480, 610);
+            BuildUI();
+        }
+
+        void BuildUI()
+        {
+            var header = new Panel { Dock = DockStyle.Top, Height = 80, BackColor = UI.Accent };
+            var lbl = new Label
+            {
+                Text = "Create Account",
+                Font = UI.TitleFont,
+                ForeColor = UI.White,
+                AutoSize = true,
+                Location = new Point(24, 22)
+            };
+            header.Controls.Add(lbl);
+            Controls.Add(header);
+
+            var card = UI.MakeCard(400, 440);
+            card.Location = new Point(40, 98);
+            Controls.Add(card);
+
+            int y = 10;
+
+            void TextField(string label, ref TextBox box, string initial = "")
+            {
+                card.Controls.Add(UI.MakeLabel(label).Positioned(0, y));
+                y += 20;
+                box = UI.MakeInput();
+                box.Width = 352; box.Location = new Point(0, y); box.Text = initial;
+                card.Controls.Add(box);
+                y += 42;
+            }
+
+            void PwdField(string label, ref TextBox box)
+            {
+                card.Controls.Add(UI.MakeLabel(label).Positioned(0, y));
+                y += 20;
+                var wrap = UI.MakePasswordField(352, out box);
+                wrap.Location = new Point(0, y);
+                card.Controls.Add(wrap);
+                y += 42;
+            }
+
+            TextField("First Name", ref txtFirst!);
+            TextField("Last Name", ref txtLast!);
+            TextField("Email Address", ref txtEmail!);
+            PwdField("Password", ref txtPwd!);
+            PwdField("Confirm Password", ref txtConfirm!);
+
+            var btnReg = UI.MakeButton("CREATE ACCOUNT", UI.Accent, UI.White);
+            btnReg.Width = 352; btnReg.Location = new Point(0, y);
+            btnReg.Click += BtnRegister_Click;
+            card.Controls.Add(btnReg);
+            y += 48;
+
+            lblMsg = UI.MakeLabel("", UI.SmallFont, UI.Danger);
+            lblMsg.Location = new Point(0, y);
+            card.Controls.Add(lblMsg);
+        }
+
+        void BtnRegister_Click(object? s, EventArgs e)
+        {
+            lblMsg.ForeColor = UI.Danger;
+            string first = txtFirst.Text.Trim();
+            string last = txtLast.Text.Trim();
+            string email = txtEmail.Text.Trim();
+            string pwd = txtPwd.Text;
+            string confirm = txtConfirm.Text;
+
+            if (string.IsNullOrEmpty(first) || string.IsNullOrEmpty(last) ||
+                string.IsNullOrEmpty(email) || string.IsNullOrEmpty(pwd))
+            { lblMsg.Text = "All fields are required."; return; }
+
+            if (pwd != confirm)
+            { lblMsg.Text = "Passwords do not match."; return; }
+
+            bool ok = MockDB.Register(email, pwd, first, last);
+            if (ok)
+            {
+                lblMsg.ForeColor = UI.Accent;
+                lblMsg.Text = "✔ Account created! You may now log in.";
+            }
+            else
+            {
+                lblMsg.Text = "Registration failed. Email may already exist.";
+            }
+        }
+    }
 }
