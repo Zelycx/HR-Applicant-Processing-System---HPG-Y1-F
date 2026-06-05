@@ -11,6 +11,7 @@ namespace Group1_GUI_DB_OOP_Final_Project
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new LoginForm());
         }
     }
 
@@ -174,6 +175,96 @@ namespace Group1_GUI_DB_OOP_Final_Project
         {
             FirstName = first; LastName = last;
             Phone = phone; Address = address;
+        }
+    }
+    class LoginForm : Form
+    {
+        TextBox txtEmail = null!;
+        TextBox txtPassword = null!;
+        Label lblError = null!;
+
+        public LoginForm()
+        {
+            UI.StyleForm(this, "Applicant Portal – Login");
+            BuildUI();
+        }
+
+        void BuildUI()
+        {
+            var header = new Panel { Dock = DockStyle.Top, Height = 80, BackColor = UI.Primary };
+            var lblTitle = new Label
+            {
+                Text = "Applicant Portal",
+                Font = UI.TitleFont,
+                ForeColor = UI.White,
+                AutoSize = true,
+                Location = new Point(24, 22)
+            };
+            header.Controls.Add(lblTitle);
+            Controls.Add(header);
+
+            var card = UI.MakeCard(400, 360);
+            card.Location = new Point(40, 108);
+            Controls.Add(card);
+
+            int y = 10;
+            card.Controls.Add(UI.MakeLabel("APPLICANT LOGIN", UI.TitleFont, UI.Primary)
+                .Positioned(0, y));
+            y += 46;
+
+            card.Controls.Add(UI.MakeLabel("Email Address").Positioned(0, y));
+            y += 20;
+            txtEmail = UI.MakeInput();
+            txtEmail.Width = 352; txtEmail.Location = new Point(0, y);
+            card.Controls.Add(txtEmail);
+            y += 42;
+
+            card.Controls.Add(UI.MakeLabel("Password").Positioned(0, y));
+            y += 20;
+            var pwWrapper = UI.MakePasswordField(352, out txtPassword);
+            pwWrapper.Location = new Point(0, y);
+            card.Controls.Add(pwWrapper);
+            y += 46;
+
+            var btnLogin = UI.MakeButton("LOGIN", UI.Primary, UI.White);
+            btnLogin.Width = 352; btnLogin.Location = new Point(0, y);
+            btnLogin.Click += BtnLogin_Click;
+            card.Controls.Add(btnLogin);
+            y += 48;
+
+            lblError = UI.MakeLabel("", UI.SmallFont, UI.Danger);
+            lblError.Location = new Point(0, y);
+            card.Controls.Add(lblError);
+
+            var linkLbl = new LinkLabel
+            {
+                Text = "Don't have an account? Register here",
+                Font = UI.SmallFont,
+                Location = new Point(40, 468),
+                AutoSize = true
+            };
+            linkLbl.LinkClicked += (s, e) => new RegistrationForm().Show();
+            Controls.Add(linkLbl);
+        }
+        void BtnLogin_Click(object? s, EventArgs e)
+        {
+            lblError.Text = "";
+            string email = txtEmail.Text.Trim();
+            string pwd = txtPassword.Text;
+
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(pwd))
+            { lblError.Text = "Please enter your email and password."; return; }
+
+            if (MockDB.Login(email, pwd))
+            {
+                MockDB.IsLoggedIn = true;
+                new DashboardForm().Show();
+                Hide();
+            }
+            else
+            {
+                lblError.Text = "Invalid email or password.";
+            }
         }
     }
 }
