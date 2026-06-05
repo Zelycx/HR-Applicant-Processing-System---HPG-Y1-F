@@ -147,4 +147,33 @@ namespace Group1_GUI_DB_OOP_Final_Project
             f.Font = new Font("Segoe UI", 9);
         }
     }
+    static class MockDB
+    {
+        public static string Email = "";
+        public static string Password = "";
+        public static string FirstName = "";
+        public static string LastName = "";
+        public static string Phone = "";
+        public static string Address = "";
+        public static bool IsLoggedIn = false;
+
+        public static bool Login(string email, string password)
+            => email == Email && password == Password && Email != "";
+
+        public static bool Register(string email, string password,
+                                    string firstName, string lastName)
+        {
+            if (Email != "") return false;
+            Email = email; Password = password;
+            FirstName = firstName; LastName = lastName;
+            return true;
+        }
+
+        public static void SaveProfile(string first, string last,
+                                       string phone, string address)
+        {
+            FirstName = first; LastName = last;
+            Phone = phone; Address = address;
+        }
+    }
 }

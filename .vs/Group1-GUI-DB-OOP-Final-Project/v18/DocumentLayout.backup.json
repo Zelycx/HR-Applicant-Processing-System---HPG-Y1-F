@@ -14,17 +14,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\GODisGOOD\\source\\repos\\HR-Applicant-Processing-System---HPG-Y1-F\\Group1-GUI-DB-OOP-Final-Project\\Program.cs",
               "RelativeDocumentMoniker": "Group1-GUI-DB-OOP-Final-Project\\Program.cs",
-              "ToolTip": "C:\\Users\\GODisGOOD\\source\\repos\\HR-Applicant-Processing-System---HPG-Y1-F\\Group1-GUI-DB-OOP-Final-Project\\Program.cs*",
-              "RelativeToolTip": "Group1-GUI-DB-OOP-Final-Project\\Program.cs*",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAALwCAAAFAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\GODisGOOD\\source\\repos\\HR-Applicant-Processing-System---HPG-Y1-F\\Group1-GUI-DB-OOP-Final-Project\\Program.cs",
+              "RelativeToolTip": "Group1-GUI-DB-OOP-Final-Project\\Program.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABwAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-03T05:31:03.445Z",
               "EditorCaption": ""
