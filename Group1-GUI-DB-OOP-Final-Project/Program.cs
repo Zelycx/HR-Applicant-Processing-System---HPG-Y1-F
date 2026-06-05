@@ -367,4 +367,168 @@ namespace Group1_GUI_DB_OOP_Final_Project
             }
         }
     }
+    class DashboardForm : Form
+    {
+        public Label LblWelcome = null!;
+
+        public DashboardForm()
+        {
+            UI.StyleForm(this, "Applicant Portal – Dashboard", 760, 560);
+            FormClosed += (s, e) => Application.Exit();
+            BuildUI();
+        }
+
+        void BuildUI()
+        {
+            var main = new Panel
+            {
+                Location = new Point(210, 0),
+                Size = new Size(550, 560),
+                BackColor = UI.BgLight,
+                Anchor = AnchorStyles.Top | AnchorStyles.Left |
+                            AnchorStyles.Bottom | AnchorStyles.Right
+            };
+            Controls.Add(main);
+
+            var lblTitle = new Label
+            {
+                Text = "Application Dashboard",
+                Font = UI.TitleFont,
+                ForeColor = UI.TextDark,
+                AutoSize = true,
+                Location = new Point(24, 20)
+            };
+            main.Controls.Add(lblTitle);
+
+            AddInfoCard(main, "Application Status", "● Under Review",
+                        UI.Accent, 24, 72, 490, 70);
+
+            AddInfoCard(main, "Missing Requirements",
+                        "• Birth Certificate\n• Transcript of Records\n• 2x2 Photo",
+                        UI.Danger, 24, 162, 490, 100);
+
+            AddInfoCard(main, "Interview Schedule",
+                        "Date : June 20, 2026  |  10:00 AM\nVenue: Room 101, Admin Building",
+                        UI.Primary, 24, 282, 490, 80);
+
+            var btnProfile = UI.MakeButton("✎  Update My Profile", UI.Primary, UI.White);
+            btnProfile.Width = 240;
+            btnProfile.Location = new Point(24, 390);
+            btnProfile.Click += (s, e) =>
+            {
+                var pf = new ProfileForm(this);
+                pf.ShowDialog();
+            };
+            main.Controls.Add(btnProfile);
+
+            var sidebar = new Panel
+            {
+                Location = new Point(0, 0),
+                Size = new Size(208, 560),
+                BackColor = UI.Primary,
+                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom
+            };
+            Controls.Add(sidebar);
+
+            LblWelcome = new Label
+            {
+                Text = $"Hi, {MockDB.FirstName}!",
+                Font = new Font("Segoe UI", 12, FontStyle.Bold),
+                ForeColor = UI.White,
+                AutoSize = false,
+                Size = new Size(190, 40),
+                Location = new Point(10, 20),
+                TextAlign = ContentAlignment.MiddleLeft
+            };
+            sidebar.Controls.Add(LblWelcome);
+
+            var divider = new Panel
+            {
+                Location = new Point(10, 62),
+                Size = new Size(188, 1),
+                BackColor = Color.FromArgb(80, 255, 255, 255)
+            };
+            sidebar.Controls.Add(divider);
+
+            string[] navItems = { "📋  Dashboard", "👤  My Profile", "🚪  Logout" };
+            string[] navKeys = { "Dashboard", "My Profile", "Logout" };
+            int ny = 74;
+            for (int i = 0; i < navItems.Length; i++)
+            {
+                var btn = new Button
+                {
+                    Text = navItems[i],
+                    Font = new Font("Segoe UI", 9, FontStyle.Regular),
+                    ForeColor = UI.White,
+                    BackColor = UI.Primary,
+                    FlatStyle = FlatStyle.Flat,
+                    TextAlign = ContentAlignment.MiddleLeft,
+                    Width = 208,
+                    Height = 44,
+                    Location = new Point(0, ny),
+                    Cursor = Cursors.Hand,
+                    Padding = new Padding(14, 0, 0, 0)
+                };
+                btn.FlatAppearance.BorderSize = 0;
+                btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(37, 99, 235);
+                sidebar.Controls.Add(btn);
+
+                string key = navKeys[i];
+                btn.Click += (s, e) =>
+                {
+                    if (key == "My Profile")
+                    {
+                        new ProfileForm(this).ShowDialog();
+                    }
+                    else if (key == "Logout")
+                    {
+                        MockDB.IsLoggedIn = false;
+                        new LoginForm().Show();
+                        Close();
+                    }
+                };
+                ny += 45;
+            }
+        }
+
+        void AddInfoCard(Panel parent, string title, string body,
+                         Color accent, int x, int y, int w, int h)
+        {
+            var card = new Panel
+            {
+                Location = new Point(x, y),
+                Size = new Size(w, h),
+                BackColor = UI.White
+            };
+
+            var bar = new Panel
+            {
+                Location = new Point(0, 0),
+                Size = new Size(5, h),
+                BackColor = accent
+            };
+            card.Controls.Add(bar);
+
+            card.Controls.Add(new Label
+            {
+                Text = title,
+                Font = UI.LabelFont,
+                ForeColor = UI.TextGray,
+                AutoSize = true,
+                Location = new Point(14, 8)
+            });
+
+            card.Controls.Add(new Label
+            {
+                Text = body,
+                Font = new Font("Segoe UI", 9.5f),
+                ForeColor = UI.TextDark,
+                AutoSize = false,
+                Size = new Size(w - 22, h - 32),
+                Location = new Point(14, 26)
+            });
+
+            parent.Controls.Add(card);
+        }
+    }
 }
