@@ -1,3 +1,5 @@
+using Group1_GUI_DB_OOP_Final_Project.Forms.Shared.UserTypeSelection;
+
 namespace Group1_GUI_DB_OOP_Final_Project
 {
     using System;
@@ -9,9 +11,8 @@ namespace Group1_GUI_DB_OOP_Final_Project
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm());
+            ApplicationConfiguration.Initialize();
+            Application.Run(new UserTypeSelection());
         }
     }
 
