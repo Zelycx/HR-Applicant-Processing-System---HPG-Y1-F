@@ -70,6 +70,12 @@
     <Compile Include="Forms\HRDashboard.Designer.cs">
       <DependentUpon>HRDashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\screening.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\screening.Designer.cs">
+      <DependentUpon>screening.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -83,6 +89,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\HRDashboard.resx">
       <DependentUpon>HRDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\screening.resx">
+      <DependentUpon>screening.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

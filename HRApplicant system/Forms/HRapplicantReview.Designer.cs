@@ -1,6 +1,6 @@
 ﻿namespace HRApplicant_system.Forms
 {
-    partial class HRapplicantReview
+    partial class ApplicantReview
     {
         /// <summary>
         /// Required designer variable.
