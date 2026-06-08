@@ -58,6 +58,12 @@
     <Compile Include="Forms\HRApplicantList.Designer.cs">
       <DependentUpon>HRApplicantList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\HRapplicantReview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HRapplicantReview.Designer.cs">
+      <DependentUpon>HRapplicantReview.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\HRDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +77,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\HRApplicantList.resx">
       <DependentUpon>HRApplicantList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HRapplicantReview.resx">
+      <DependentUpon>HRapplicantReview.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\HRDashboard.resx">
       <DependentUpon>HRDashboard.cs</DependentUpon>
