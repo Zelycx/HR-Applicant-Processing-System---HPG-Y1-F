@@ -70,6 +70,12 @@
     <Compile Include="Forms\HRDashboard.Designer.cs">
       <DependentUpon>HRDashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Interview Evaluation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Interview Evaluation.Designer.cs">
+      <DependentUpon>Interview Evaluation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Interview Schedule.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +101,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\HRDashboard.resx">
       <DependentUpon>HRDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Interview Evaluation.resx">
+      <DependentUpon>Interview Evaluation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Interview Schedule.resx">
       <DependentUpon>Interview Schedule.cs</DependentUpon>
