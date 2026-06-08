@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Group1_GUI_DB_OOP_Final_Project.Models
 {
-    internal class ApplicantAccounts
+    public class ApplicantAccounts
     {
         public int ApplicantAccountID { get; set; }
         public string Email { get; set; }

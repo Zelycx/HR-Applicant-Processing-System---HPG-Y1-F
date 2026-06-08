@@ -34,8 +34,8 @@
             ApplicantButton = new Button();
             pictureBox1 = new PictureBox();
             panel2 = new Panel();
-            panel3 = new Panel();
             pictureBox2 = new PictureBox();
+            panel3 = new Panel();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
@@ -96,6 +96,7 @@
             ApplicantButton.TabIndex = 0;
             ApplicantButton.Text = "APPLICANT";
             ApplicantButton.UseVisualStyleBackColor = false;
+            ApplicantButton.Click += ApplicantButton_Click;
             // 
             // pictureBox1
             // 
@@ -120,14 +121,6 @@
             panel2.Size = new Size(1902, 302);
             panel2.TabIndex = 3;
             // 
-            // panel3
-            // 
-            panel3.BackColor = Color.LightSlateGray;
-            panel3.Location = new Point(62, 13);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(10, 77);
-            panel3.TabIndex = 4;
-            // 
             // pictureBox2
             // 
             pictureBox2.BackColor = Color.LightSteelBlue;
@@ -138,6 +131,14 @@
             pictureBox2.Size = new Size(49, 77);
             pictureBox2.TabIndex = 3;
             pictureBox2.TabStop = false;
+            // 
+            // panel3
+            // 
+            panel3.BackColor = Color.LightSlateGray;
+            panel3.Location = new Point(62, 13);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(10, 77);
+            panel3.TabIndex = 4;
             // 
             // UserTypeSelection
             // 
