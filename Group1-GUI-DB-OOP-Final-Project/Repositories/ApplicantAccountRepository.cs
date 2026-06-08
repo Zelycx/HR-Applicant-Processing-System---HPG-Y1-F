@@ -22,8 +22,7 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
         {
             try
             {
-                using (MySqlConnection connection =
-                       databaseConnector.GetConnection())
+                using (MySqlConnection connection = databaseConnector.GetConnection())
                 {
                     connection.Open();
 
@@ -38,37 +37,21 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
                         WHERE Email = @Email
                         LIMIT 1";
 
-                    using (MySqlCommand command =
-                           new MySqlCommand(query, connection))
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue(
-                            "@Email",
-                            email);
+                        command.Parameters.AddWithValue("@Email", email);
 
-                        using (MySqlDataReader reader =
-                               command.ExecuteReader())
+                        using (MySqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())
                             {
                                 return new ApplicantAccounts
                                 {
-                                    ApplicantAccountID =
-                                        Convert.ToInt32(
-                                            reader["ApplicantAccountID"]),
-
-                                    Email =
-                                        reader["Email"].ToString(),
-
-                                    PasswordHash =
-                                        reader["PasswordHash"].ToString(),
-
-                                    IsActive =
-                                        Convert.ToBoolean(
-                                            reader["IsActive"]),
-
-                                    CreatedAt =
-                                        Convert.ToDateTime(
-                                            reader["CreatedAt"])
+                                    ApplicantAccountID = Convert.ToInt32(reader["ApplicantAccountID"]),
+                                    Email = reader["Email"].ToString(),
+                                    PasswordHash = reader["PasswordHash"].ToString(),
+                                    IsActive = Convert.ToBoolean(reader["IsActive"]),
+                                    CreatedAt = Convert.ToDateTime(reader["CreatedAt"])
                                 };
                             }
                         }
@@ -82,26 +65,21 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
                 switch (ex.Number)
                 {
                     case 1042:
-                        throw new Exception(
-                            "Please start XAMPP/MySQL.");
+                        throw new Exception("Please start XAMPP/MySQL.");
 
                     case 1045:
-                        throw new Exception(
-                            "Incorrect DB credentials.");
+                        throw new Exception("Incorrect database credentials.");
 
                     case 1049:
-                        throw new Exception(
-                            "Database was not found.");
+                        throw new Exception("Database was not found.");
 
                     default:
-                        throw new Exception(
-                            "Database error: " + ex.Message);
+                        throw new Exception("Database error: " + ex.Message);
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception(
-                    "Unexpected error: " + ex.Message);
+                throw new Exception("Unexpected error: " + ex.Message);
             }
         }
 
@@ -109,8 +87,7 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
         {
             try
             {
-                using (MySqlConnection connection =
-                       databaseConnector.GetConnection())
+                using (MySqlConnection connection = databaseConnector.GetConnection())
                 {
                     connection.Open();
 
@@ -119,24 +96,57 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
                         FROM applicantaccounts
                         WHERE Email = @Email";
 
-                    using (MySqlCommand command =
-                           new MySqlCommand(query, connection))
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue(
-                            "@Email",
-                            email);
+                        command.Parameters.AddWithValue("@Email", email);
 
-                        int count =
-                            Convert.ToInt32(
-                                command.ExecuteScalar());
-
+                        int count = Convert.ToInt32(command.ExecuteScalar());
                         return count > 0;
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                throw;
+                throw new Exception("Unexpected error: " + ex.Message);
+            }
+        }
+
+        public void CreateAccount(string email, string passwordHash)
+        {
+            using (MySqlConnection connection =
+                   databaseConnector.GetConnection())
+            {
+                connection.Open();
+
+                string query = @"
+                INSERT INTO applicantaccounts
+                (
+                    Email,
+                    PasswordHash,
+                    IsActive,
+                    CreatedAt
+                )
+                VALUES
+                (
+                    @Email,
+                    @PasswordHash,
+                    1,
+                    NOW()
+                )";
+
+                using (MySqlCommand command =
+                       new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue(
+                        "@Email",
+                        email);
+
+                    command.Parameters.AddWithValue(
+                        "@PasswordHash",
+                        passwordHash);
+
+                    command.ExecuteNonQuery();
+                }
             }
         }
     }

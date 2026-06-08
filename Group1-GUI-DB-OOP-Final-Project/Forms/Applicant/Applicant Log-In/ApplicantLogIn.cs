@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Group1_GUI_DB_OOP_Final_Project.Forms.Applicant;
+using Group1_GUI_DB_OOP_Final_Project.DTOs;
 
 namespace Group1_GUI_DB_OOP_Final_Project.Forms.Shared.User_Type_Selection
 {
@@ -23,6 +25,8 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Shared.User_Type_Selection
             this.WindowState = FormWindowState.Maximized;
         }
 
+        private bool isVisible = false; // put it in here, just being good ( a useless mistake that has been fixed )
+
         private void BackButton_Click(object sender, EventArgs e)
         {
             if (this.Owner != null)
@@ -32,8 +36,6 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Shared.User_Type_Selection
 
             this.Close();
         }
-
-        private bool isVisible = false;
 
         private void SeePasswordButton_Click(object sender, EventArgs e)
         {
@@ -62,20 +64,14 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Shared.User_Type_Selection
 
             if (string.IsNullOrWhiteSpace(email))
             {
-                new NotificationBox(
-                    "Please enter your email.")
-                    .ShowDialog();
-
+                new NotificationBox("Please enter your email.").ShowDialog();
                 EmailTextBox.Focus();
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(password))
             {
-                new NotificationBox(
-                    "Please enter your password.")
-                    .ShowDialog();
-
+                new NotificationBox("Please enter your password.").ShowDialog();
                 PasswordTextBox.Focus();
                 return;
             }
@@ -84,50 +80,39 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Shared.User_Type_Selection
 
             if (!userService.EmailIsValid(email))
             {
-                new NotificationBox(
-                    "Please enter a valid email address.")
-                    .ShowDialog();
-
+                new NotificationBox("Please enter a valid email address.").ShowDialog();
                 EmailTextBox.Focus();
                 return;
             }
 
             try
             {
-                var account = userService.AuthenticateApplicant(
-                    email,
-                    password);
+                LogInResult result = userService.AuthenticateApplicant(email, password);
 
-                if (account == null)
+                if (!result.Success)
                 {
-                    new NotificationBox(
-                        "Invalid email or password.")
-                        .ShowDialog();
-
+                    new NotificationBox(result.Message).ShowDialog();
                     return;
                 }
 
-                new NotificationBox(
-                    "Login successful!")
-                    .ShowDialog();
+                new NotificationBox(result.Message).ShowDialog();
 
-                // Will Do After Creating the Dashboard :
-                // ApplicantDashboard dashboard = new ApplicantDashboard(account);
+                // After dashboard is ready:
+                // ApplicantDashboard dashboard = new ApplicantDashboard(result.Account);
                 // dashboard.Show();
                 // this.Hide();
             }
-            catch (MySql.Data.MySqlClient.MySqlException)
-            {
-                new NotificationBox(
-                    "Unable to connect to the database. Please start XAMPP/MySQL.")
-                    .ShowDialog();
-            }
             catch (Exception ex)
             {
-                new NotificationBox(
-                    ex.Message)
-                    .ShowDialog();
+                new NotificationBox(ex.Message).ShowDialog();
             }
+        }
+
+        private void RegisterButton_Click(object sender, EventArgs e)
+        {
+            ApplicantRegistration applicantRegistration = new ApplicantRegistration();
+            applicantRegistration.Show();
+            this.Close();
         }
     }
 }
