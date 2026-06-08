@@ -1,6 +1,6 @@
-﻿namespace HRApplicant_system
+﻿namespace HRApplicant_system.Forms
 {
-    partial class Form1
+    partial class HRDashboard
     {
         /// <summary>
         /// Required designer variable.
@@ -31,10 +31,10 @@
             this.lblWelcome = new System.Windows.Forms.Label();
             this.lblRole = new System.Windows.Forms.Label();
             this.lblTotalApplicants = new System.Windows.Forms.Label();
-            this.lblPending = new System.Windows.Forms.Label();
-            this.lblShortlisted = new System.Windows.Forms.Label();
             this.lblTotalValue = new System.Windows.Forms.Label();
+            this.lblPending = new System.Windows.Forms.Label();
             this.lblPendingValue = new System.Windows.Forms.Label();
+            this.lblShortlisted = new System.Windows.Forms.Label();
             this.lblShortlistedValue = new System.Windows.Forms.Label();
             this.btnApplicantList = new System.Windows.Forms.Button();
             this.btnScreening = new System.Windows.Forms.Button();
@@ -72,86 +72,81 @@
             // 
             this.lblTotalApplicants.AutoSize = true;
             this.lblTotalApplicants.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalApplicants.Location = new System.Drawing.Point(70, 95);
+            this.lblTotalApplicants.Location = new System.Drawing.Point(43, 105);
             this.lblTotalApplicants.Name = "lblTotalApplicants";
             this.lblTotalApplicants.Size = new System.Drawing.Size(175, 25);
             this.lblTotalApplicants.TabIndex = 3;
             this.lblTotalApplicants.Text = "Total Applicants:";
-            this.lblTotalApplicants.Click += new System.EventHandler(this.lblTotalApplicants_Click);
-            // 
-            // lblPending
-            // 
-            this.lblPending.AutoSize = true;
-            this.lblPending.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPending.Location = new System.Drawing.Point(325, 95);
-            this.lblPending.Name = "lblPending";
-            this.lblPending.Size = new System.Drawing.Size(173, 25);
-            this.lblPending.TabIndex = 5;
-            this.lblPending.Text = "Pending Review:";
-            this.lblPending.Click += new System.EventHandler(this.lblPending_Click);
-            // 
-            // lblShortlisted
-            // 
-            this.lblShortlisted.AutoSize = true;
-            this.lblShortlisted.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblShortlisted.Location = new System.Drawing.Point(583, 95);
-            this.lblShortlisted.Name = "lblShortlisted";
-            this.lblShortlisted.Size = new System.Drawing.Size(122, 25);
-            this.lblShortlisted.TabIndex = 7;
-            this.lblShortlisted.Text = "Shortlisted:";
-            this.lblShortlisted.Click += new System.EventHandler(this.lblShortlisted_Click);
             // 
             // lblTotalValue
             // 
             this.lblTotalValue.AutoSize = true;
             this.lblTotalValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalValue.ForeColor = System.Drawing.Color.SteelBlue;
-            this.lblTotalValue.Location = new System.Drawing.Point(130, 120);
+            this.lblTotalValue.Location = new System.Drawing.Point(111, 130);
             this.lblTotalValue.Name = "lblTotalValue";
             this.lblTotalValue.Size = new System.Drawing.Size(31, 32);
-            this.lblTotalValue.TabIndex = 8;
+            this.lblTotalValue.TabIndex = 4;
             this.lblTotalValue.Text = "0";
+            // 
+            // lblPending
+            // 
+            this.lblPending.AutoSize = true;
+            this.lblPending.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPending.Location = new System.Drawing.Point(323, 105);
+            this.lblPending.Name = "lblPending";
+            this.lblPending.Size = new System.Drawing.Size(173, 25);
+            this.lblPending.TabIndex = 5;
+            this.lblPending.Text = "Pending Review:";
             // 
             // lblPendingValue
             // 
             this.lblPendingValue.AutoSize = true;
             this.lblPendingValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPendingValue.ForeColor = System.Drawing.Color.Orange;
-            this.lblPendingValue.Location = new System.Drawing.Point(396, 120);
+            this.lblPendingValue.Location = new System.Drawing.Point(396, 130);
             this.lblPendingValue.Name = "lblPendingValue";
             this.lblPendingValue.Size = new System.Drawing.Size(31, 32);
-            this.lblPendingValue.TabIndex = 9;
+            this.lblPendingValue.TabIndex = 6;
             this.lblPendingValue.Text = "0";
+            // 
+            // lblShortlisted
+            // 
+            this.lblShortlisted.AutoSize = true;
+            this.lblShortlisted.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblShortlisted.Location = new System.Drawing.Point(599, 105);
+            this.lblShortlisted.Name = "lblShortlisted";
+            this.lblShortlisted.Size = new System.Drawing.Size(122, 25);
+            this.lblShortlisted.TabIndex = 7;
+            this.lblShortlisted.Text = "Shortlisted:";
             // 
             // lblShortlistedValue
             // 
             this.lblShortlistedValue.AutoSize = true;
             this.lblShortlistedValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblShortlistedValue.ForeColor = System.Drawing.Color.Green;
-            this.lblShortlistedValue.Location = new System.Drawing.Point(623, 120);
+            this.lblShortlistedValue.Location = new System.Drawing.Point(642, 130);
             this.lblShortlistedValue.Name = "lblShortlistedValue";
             this.lblShortlistedValue.Size = new System.Drawing.Size(31, 32);
-            this.lblShortlistedValue.TabIndex = 10;
+            this.lblShortlistedValue.TabIndex = 8;
             this.lblShortlistedValue.Text = "0";
-            this.lblShortlistedValue.Click += new System.EventHandler(this.lblShortlistedValue_Click);
             // 
             // btnApplicantList
             // 
             this.btnApplicantList.BackColor = System.Drawing.Color.SteelBlue;
             this.btnApplicantList.ForeColor = System.Drawing.Color.White;
-            this.btnApplicantList.Location = new System.Drawing.Point(173, 190);
+            this.btnApplicantList.Location = new System.Drawing.Point(173, 175);
             this.btnApplicantList.Name = "btnApplicantList";
             this.btnApplicantList.Size = new System.Drawing.Size(169, 48);
-            this.btnApplicantList.TabIndex = 11;
+            this.btnApplicantList.TabIndex = 9;
             this.btnApplicantList.Text = "View Applicants";
             this.btnApplicantList.UseVisualStyleBackColor = false;
-            this.btnApplicantList.Click += new System.EventHandler(this.btnApplicantList_Click);
             // 
             // btnScreening
             // 
             this.btnScreening.BackColor = System.Drawing.Color.SteelBlue;
             this.btnScreening.ForeColor = System.Drawing.Color.White;
-            this.btnScreening.Location = new System.Drawing.Point(173, 267);
+            this.btnScreening.Location = new System.Drawing.Point(173, 248);
             this.btnScreening.Name = "btnScreening";
             this.btnScreening.Size = new System.Drawing.Size(169, 48);
             this.btnScreening.TabIndex = 15;
@@ -162,7 +157,7 @@
             // 
             this.btnInterviewEval.BackColor = System.Drawing.Color.SteelBlue;
             this.btnInterviewEval.ForeColor = System.Drawing.Color.White;
-            this.btnInterviewEval.Location = new System.Drawing.Point(173, 344);
+            this.btnInterviewEval.Location = new System.Drawing.Point(173, 326);
             this.btnInterviewEval.Name = "btnInterviewEval";
             this.btnInterviewEval.Size = new System.Drawing.Size(169, 48);
             this.btnInterviewEval.TabIndex = 16;
@@ -173,19 +168,18 @@
             // 
             this.btnReports.BackColor = System.Drawing.Color.SteelBlue;
             this.btnReports.ForeColor = System.Drawing.Color.White;
-            this.btnReports.Location = new System.Drawing.Point(173, 418);
+            this.btnReports.Location = new System.Drawing.Point(173, 401);
             this.btnReports.Name = "btnReports";
             this.btnReports.Size = new System.Drawing.Size(169, 48);
             this.btnReports.TabIndex = 17;
             this.btnReports.Text = "Reports";
             this.btnReports.UseVisualStyleBackColor = false;
-            this.btnReports.Click += new System.EventHandler(this.btnReports_Click);
             // 
             // btnJobVacancies
             // 
             this.btnJobVacancies.BackColor = System.Drawing.Color.SteelBlue;
             this.btnJobVacancies.ForeColor = System.Drawing.Color.White;
-            this.btnJobVacancies.Location = new System.Drawing.Point(448, 190);
+            this.btnJobVacancies.Location = new System.Drawing.Point(458, 175);
             this.btnJobVacancies.Name = "btnJobVacancies";
             this.btnJobVacancies.Size = new System.Drawing.Size(169, 48);
             this.btnJobVacancies.TabIndex = 18;
@@ -196,7 +190,7 @@
             // 
             this.btnInterviewSched.BackColor = System.Drawing.Color.SteelBlue;
             this.btnInterviewSched.ForeColor = System.Drawing.Color.White;
-            this.btnInterviewSched.Location = new System.Drawing.Point(448, 265);
+            this.btnInterviewSched.Location = new System.Drawing.Point(458, 248);
             this.btnInterviewSched.Name = "btnInterviewSched";
             this.btnInterviewSched.Size = new System.Drawing.Size(169, 53);
             this.btnInterviewSched.TabIndex = 19;
@@ -207,7 +201,7 @@
             // 
             this.btnHiringDecision.BackColor = System.Drawing.Color.SteelBlue;
             this.btnHiringDecision.ForeColor = System.Drawing.Color.White;
-            this.btnHiringDecision.Location = new System.Drawing.Point(448, 344);
+            this.btnHiringDecision.Location = new System.Drawing.Point(458, 326);
             this.btnHiringDecision.Name = "btnHiringDecision";
             this.btnHiringDecision.Size = new System.Drawing.Size(169, 48);
             this.btnHiringDecision.TabIndex = 20;
@@ -218,14 +212,14 @@
             // 
             this.btnLogout.BackColor = System.Drawing.Color.Red;
             this.btnLogout.ForeColor = System.Drawing.Color.White;
-            this.btnLogout.Location = new System.Drawing.Point(448, 418);
+            this.btnLogout.Location = new System.Drawing.Point(458, 401);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(169, 48);
             this.btnLogout.TabIndex = 21;
             this.btnLogout.Text = "Logout";
             this.btnLogout.UseVisualStyleBackColor = false;
             // 
-            // Form1
+            // HRDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -239,15 +233,14 @@
             this.Controls.Add(this.btnScreening);
             this.Controls.Add(this.btnApplicantList);
             this.Controls.Add(this.lblShortlistedValue);
-            this.Controls.Add(this.lblPendingValue);
-            this.Controls.Add(this.lblTotalValue);
             this.Controls.Add(this.lblShortlisted);
+            this.Controls.Add(this.lblPendingValue);
             this.Controls.Add(this.lblPending);
+            this.Controls.Add(this.lblTotalValue);
             this.Controls.Add(this.lblTotalApplicants);
             this.Controls.Add(this.lblRole);
             this.Controls.Add(this.lblWelcome);
-            this.Name = "Form1";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Name = "HRDashboard";
             this.Text = "HRDashboard";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -259,10 +252,10 @@
         private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.Label lblRole;
         private System.Windows.Forms.Label lblTotalApplicants;
-        private System.Windows.Forms.Label lblPending;
-        private System.Windows.Forms.Label lblShortlisted;
         private System.Windows.Forms.Label lblTotalValue;
+        private System.Windows.Forms.Label lblPending;
         private System.Windows.Forms.Label lblPendingValue;
+        private System.Windows.Forms.Label lblShortlisted;
         private System.Windows.Forms.Label lblShortlistedValue;
         private System.Windows.Forms.Button btnApplicantList;
         private System.Windows.Forms.Button btnScreening;
@@ -274,4 +267,3 @@
         private System.Windows.Forms.Button btnLogout;
     }
 }
-

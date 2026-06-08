@@ -16,5 +16,35 @@ namespace HRApplicant_system
         {
             InitializeComponent();
         }
+
+        private void lblPending_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblShortlisted_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblShortlistedValue_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnApplicantList_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblTotalApplicants_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnReports_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
