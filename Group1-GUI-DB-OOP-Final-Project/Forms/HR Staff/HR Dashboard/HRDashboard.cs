@@ -16,5 +16,15 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR
         {
             InitializeComponent();
         }
+
+        private void HRDashboard_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void HRDashboard_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

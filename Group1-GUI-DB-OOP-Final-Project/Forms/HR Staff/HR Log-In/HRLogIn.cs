@@ -49,11 +49,9 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR
 
             if (username == "admin" && password == "1234")
             {
-                MessageBox.Show("Login Successful");
-            }
-            else
-            {
-                MessageBox.Show("Invalid Username or Password");
+                HRDashboard dashboard = new HRDashboard();
+                dashboard.Show();
+                this.Hide();
             }
         }
     }
