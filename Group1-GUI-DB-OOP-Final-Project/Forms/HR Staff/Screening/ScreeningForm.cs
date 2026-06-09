@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR
+namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR_Staff.Screening
 {
-    public partial class Screening : Form
+    public partial class ScreeningForm : Form
     {
-        public Screening()
+        public ScreeningForm()
         {
             InitializeComponent();
         }
