@@ -1,4 +1,5 @@
 ﻿using Group1_GUI_DB_OOP_Final_Project.Forms.Shared.UserTypeSelection;
+using Group1_GUI_DB_OOP_Final_Project.Forms.Applicant.Applicant_LogIn;
 using Group1_GUI_DB_OOP_Final_Project.Services.UserServices;
 using Group1_GUI_DB_OOP_Final_Project.Forms.Shared.SharedFunctions.Notifications;
 using System;
@@ -13,7 +14,7 @@ using System.Windows.Forms;
 using Group1_GUI_DB_OOP_Final_Project.Forms.Applicant;
 using Group1_GUI_DB_OOP_Final_Project.DTOs;
 
-namespace Group1_GUI_DB_OOP_Final_Project.Forms.Shared.User_Type_Selection
+namespace Group1_GUI_DB_OOP_Final_Project.Forms.Applicant.Applicant_LogIn
 {
     public partial class ApplicantLogIn : Form
     {
@@ -29,11 +30,8 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Shared.User_Type_Selection
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            if (this.Owner != null)
-            {
-                this.Owner.Show();
-            }
-
+            UserTypeSelection userTypeSelection = new UserTypeSelection();
+            userTypeSelection.Show();
             this.Close();
         }
 
@@ -97,10 +95,9 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Shared.User_Type_Selection
 
                 new NotificationBox(result.Message).ShowDialog();
 
-                // After dashboard is ready:
-                // ApplicantDashboard dashboard = new ApplicantDashboard(result.Account);
-                // dashboard.Show();
-                // this.Hide();
+                ApplicantDashboard dashboard = new ApplicantDashboard(result.Account);
+                dashboard.Show();
+                this.Hide();
             }
             catch (Exception ex)
             {

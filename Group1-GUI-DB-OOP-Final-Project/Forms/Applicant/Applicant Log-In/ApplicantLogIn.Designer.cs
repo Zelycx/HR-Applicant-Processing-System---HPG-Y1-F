@@ -1,4 +1,4 @@
-﻿namespace Group1_GUI_DB_OOP_Final_Project.Forms.Shared.User_Type_Selection
+﻿namespace Group1_GUI_DB_OOP_Final_Project.Forms.Applicant.Applicant_LogIn
 {
     partial class ApplicantLogIn
     {
