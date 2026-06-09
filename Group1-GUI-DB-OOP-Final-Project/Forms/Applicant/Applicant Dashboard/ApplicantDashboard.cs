@@ -22,6 +22,7 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Applicant
     {
         private readonly ApplicantAccounts _account;
         private readonly ApplicantDashboardServices _dashboardService;
+        private bool _dashboardLoaded = false;
 
         public ApplicantDashboard(ApplicantAccounts account)
         {
@@ -30,12 +31,12 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Applicant
             _account = account;
             _dashboardService = new ApplicantDashboardServices();
 
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
+            FormBorderStyle = FormBorderStyle.None;
+            WindowState = FormWindowState.Maximized;
 
-            // I can't find this inside the properties window T-T
             Applications.EnableHeadersVisualStyles = false;
             Applications.ColumnHeadersDefaultCellStyle.BackColor = Color.White;
+
             MissingRequirements.EnableHeadersVisualStyles = false;
             MissingRequirements.ColumnHeadersDefaultCellStyle.BackColor = Color.White;
 
@@ -46,7 +47,6 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Applicant
         private void ConfigureApplicationsGrid()
         {
             Applications.AutoGenerateColumns = false;
-
             PositionColumn.DataPropertyName = "PositionColumn";
             DateAppliedColumn.DataPropertyName = "DateAppliedColumn";
             StatusColumn.DataPropertyName = "StatusColumn";
@@ -55,36 +55,108 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Applicant
         private void ConfigureMissingRequirementsGrid()
         {
             MissingRequirements.AutoGenerateColumns = false;
-
             JobRow.DataPropertyName = "JobRow";
             MissReqRow.DataPropertyName = "MissReqRow";
         }
 
         private void ApplicantDashboard_Load(object sender, EventArgs e)
         {
+            if (_dashboardLoaded)
+            {
+                return;
+            }
+
             LoadDashboardData();
+            _dashboardLoaded = true;
         }
 
         private void LoadDashboardData()
         {
             try
             {
-                LoadApplications();
-                LoadMissingRequirements();
-                LoadNearestInterview();
                 LoadSummaryLabels();
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message);
+                PlaceHolderApp.Text = "0";
+                PlaceHolderIntv.Text = "0";
+                PlaceHolderCS.Text = "No Applications";
             }
+
+            try
+            {
+                LoadNameAndLastLogin();
+            }
+            catch
+            {
+                PlaceHolderForName.Text = "Applicant";
+                ApplicantLastLog.Text = "-";
+            }
+
+            try
+            {
+                LoadApplications();
+            }
+            catch
+            {
+                Applications.DataSource = null;
+            }
+
+            try
+            {
+                LoadMissingRequirements();
+            }
+            catch
+            {
+                MissingRequirements.DataSource = null;
+            }
+
+            try
+            {
+                LoadNearestInterview();
+            }
+            catch
+            {
+                PositionShower.Text = "";
+                DateShower.Text = "";
+                TimeShower.Text = "";
+                ModeShower.Text = "";
+            }
+        }
+
+        private void LoadSummaryLabels()
+        {
+            ApplicantDashboardSummary summary =
+                _dashboardService.GetDashboardSummary(_account.ApplicantAccountID);
+
+            PlaceHolderApp.Text = summary.ApplicationCount.ToString();
+            PlaceHolderIntv.Text = summary.UpcomingInterviewCount.ToString();
+            PlaceHolderCS.Text = string.IsNullOrWhiteSpace(summary.LatestStatus)
+                ? "No Applications"
+                : summary.LatestStatus;
+        }
+
+        private void LoadNameAndLastLogin()
+        {
+            string fullName =
+                _dashboardService.GetApplicantFullName(_account.ApplicantAccountID);
+
+            PlaceHolderForName.Text =
+                string.IsNullOrWhiteSpace(fullName) ? "Applicant" : fullName;
+
+            DateTime? lastLogin =
+                _dashboardService.GetApplicantLastLogin(_account.ApplicantAccountID);
+
+            ApplicantLastLog.Text =
+                lastLogin.HasValue
+                    ? lastLogin.Value.ToString("MMMM dd, yyyy hh:mm tt")
+                    : "-";
         }
 
         private void LoadApplications()
         {
             List<ApplicantApplicationRowDTO> applications =
-                _dashboardService.GetApplications(
-                    _account.ApplicantAccountID);
+                _dashboardService.GetApplications(_account.ApplicantAccountID);
 
             Applications.DataSource = null;
             Applications.DataSource = applications;
@@ -93,8 +165,7 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Applicant
         private void LoadMissingRequirements()
         {
             List<ApplicantMissingRequirementRowDTO> missingRequirements =
-                _dashboardService.GetMissingRequirements(
-                    _account.ApplicantAccountID);
+                _dashboardService.GetMissingRequirements(_account.ApplicantAccountID);
 
             MissingRequirements.DataSource = null;
             MissingRequirements.DataSource = missingRequirements;
@@ -103,8 +174,7 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Applicant
         private void LoadNearestInterview()
         {
             ApplicantInterviewDTO interview =
-                _dashboardService.GetNearestInterview(
-                    _account.ApplicantAccountID);
+                _dashboardService.GetNearestInterview(_account.ApplicantAccountID);
 
             if (interview == null)
             {
@@ -121,30 +191,6 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Applicant
             ModeShower.Text = interview.ModeShower;
         }
 
-        private void LoadSummaryLabels()
-        {
-            List<ApplicantApplicationRowDTO> applications =
-                _dashboardService.GetApplications(
-                    _account.ApplicantAccountID);
-
-            PlaceHolderApp.Text = applications.Count.ToString();
-
-            PlaceHolderIntv.Text =
-                _dashboardService.GetNearestInterview(
-                    _account.ApplicantAccountID) != null
-                    ? "1"
-                    : "0";
-
-            if (applications.Count > 0)
-            {
-                PlaceHolderCS.Text = applications[0].StatusColumn;
-            }
-            else
-            {
-                PlaceHolderCS.Text = "No Applications";
-            }
-        }
-
         private void LogOutButton_Click(object sender, EventArgs e)
         {
             ConfirmationForm confirm = new ConfirmationForm("Are you sure you want to Log Out??");
@@ -152,44 +198,37 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Applicant
             if (confirm.ShowDialog() == DialogResult.Yes)
             {
                 ApplicantLogIn applicantLogIn = new ApplicantLogIn();
-
                 applicantLogIn.Show();
-                this.Close();
+                Close();
             }
         }
 
         private void GoToMyProfile_Click(object sender, EventArgs e)
         {
             ApplicantProfile applicantPrf = new ApplicantProfile();
-
             applicantPrf.Show();
-            this.Close();
+            Close();
         }
 
         private void GoToJobVacancies_Click(object sender, EventArgs e)
         {
             JobVacanciesWindow jobVacanciesWindow = new JobVacanciesWindow();
-
             jobVacanciesWindow.Show();
-            this.Close();
+            Close();
         }
 
         private void GoToMyDocuments_Click(object sender, EventArgs e)
         {
-            Document applicantDocument =
-                new Document();
-
+            Document applicantDocument = new Document();
             applicantDocument.Show();
-            this.Close();
+            Close();
         }
 
         private void GoToStatusTracking_Click(object sender, EventArgs e)
         {
-            ApplicationStatus applicationStatus =
-                new ApplicationStatus();
-
+            ApplicationStatus applicationStatus = new ApplicationStatus();
             applicationStatus.Show();
-            this.Close();
+            Close();
         }
     }
 }

@@ -42,7 +42,7 @@
             panel5 = new Panel();
             panel4 = new Panel();
             ApplicantLastLog = new Label();
-            label4 = new Label();
+            PlaceHolderForName = new Label();
             NameOfApplicant = new Label();
             label3 = new Label();
             label2 = new Label();
@@ -63,6 +63,8 @@
             panel13 = new Panel();
             label9 = new Label();
             MissingRequirements = new DataGridView();
+            JobRow = new DataGridViewTextBoxColumn();
+            MissReqRow = new DataGridViewTextBoxColumn();
             panel14 = new Panel();
             label10 = new Label();
             panel15 = new Panel();
@@ -86,8 +88,6 @@
             GoToStatusTracking = new Button();
             pictureBox2 = new PictureBox();
             panel19 = new Panel();
-            JobRow = new DataGridViewTextBoxColumn();
-            MissReqRow = new DataGridViewTextBoxColumn();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel7.SuspendLayout();
@@ -230,7 +230,7 @@
             // 
             panel4.BackColor = Color.AliceBlue;
             panel4.Controls.Add(ApplicantLastLog);
-            panel4.Controls.Add(label4);
+            panel4.Controls.Add(PlaceHolderForName);
             panel4.Controls.Add(NameOfApplicant);
             panel4.Controls.Add(label3);
             panel4.Controls.Add(label2);
@@ -249,15 +249,15 @@
             ApplicantLastLog.TabIndex = 4;
             ApplicantLastLog.Text = "Place Holder";
             // 
-            // label4
+            // PlaceHolderForName
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Century", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(203, 33);
-            label4.Name = "label4";
-            label4.Size = new Size(259, 33);
-            label4.TabIndex = 3;
-            label4.Text = "PLACE HOLDER";
+            PlaceHolderForName.AutoSize = true;
+            PlaceHolderForName.Font = new Font("Century", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            PlaceHolderForName.Location = new Point(203, 33);
+            PlaceHolderForName.Name = "PlaceHolderForName";
+            PlaceHolderForName.Size = new Size(259, 33);
+            PlaceHolderForName.TabIndex = 3;
+            PlaceHolderForName.Text = "PLACE HOLDER";
             // 
             // NameOfApplicant
             // 
@@ -353,7 +353,7 @@
             // 
             PlaceHolderCS.AutoSize = true;
             PlaceHolderCS.Font = new Font("Century", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            PlaceHolderCS.Location = new Point(48, 29);
+            PlaceHolderCS.Location = new Point(25, 29);
             PlaceHolderCS.Name = "PlaceHolderCS";
             PlaceHolderCS.Size = new Size(37, 22);
             PlaceHolderCS.TabIndex = 12;
@@ -482,6 +482,22 @@
             MissingRequirements.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             MissingRequirements.Size = new Size(377, 188);
             MissingRequirements.TabIndex = 6;
+            // 
+            // JobRow
+            // 
+            JobRow.HeaderText = "Job";
+            JobRow.MinimumWidth = 9;
+            JobRow.Name = "JobRow";
+            JobRow.ReadOnly = true;
+            JobRow.Width = 185;
+            // 
+            // MissReqRow
+            // 
+            MissReqRow.HeaderText = "Missing Requirements";
+            MissReqRow.MinimumWidth = 9;
+            MissReqRow.Name = "MissReqRow";
+            MissReqRow.ReadOnly = true;
+            MissReqRow.Width = 185;
             // 
             // panel14
             // 
@@ -720,22 +736,6 @@
             panel19.Size = new Size(328, 10);
             panel19.TabIndex = 14;
             // 
-            // JobRow
-            // 
-            JobRow.HeaderText = "Job";
-            JobRow.MinimumWidth = 9;
-            JobRow.Name = "JobRow";
-            JobRow.ReadOnly = true;
-            JobRow.Width = 185;
-            // 
-            // MissReqRow
-            // 
-            MissReqRow.HeaderText = "Missing Requirements";
-            MissReqRow.MinimumWidth = 9;
-            MissReqRow.Name = "MissReqRow";
-            MissReqRow.ReadOnly = true;
-            MissReqRow.Width = 185;
-            // 
             // ApplicantDashboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -806,7 +806,7 @@
         private Label NameOfApplicant;
         private Label label3;
         private Label label2;
-        private Label label4;
+        private Label PlaceHolderForName;
         private Label ApplicantLastLog;
         private Panel panel6;
         private Panel panel8;

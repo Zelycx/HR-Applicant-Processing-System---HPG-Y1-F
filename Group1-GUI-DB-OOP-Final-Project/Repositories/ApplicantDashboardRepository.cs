@@ -40,7 +40,7 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
             }
         }
 
-        public ApplicantDashboardSummary GetSummary(int applicantAccountId)
+        public ApplicantDashboardSummary GetDashboardSummary(int applicantAccountId)
         {
             try
             {
@@ -75,16 +75,18 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
                         applicationCount = Convert.ToInt32(command.ExecuteScalar());
                     }
 
-                    string upcomingInterviewQuery = @"
+                    string interviewCountQuery = @"
                         SELECT COUNT(*)
                         FROM interviewschedules i
                         INNER JOIN applications a ON i.ApplicationID = a.ApplicationID
                         WHERE a.ApplicantID = @ApplicantID
                           AND i.Status = 'Scheduled'
-                          AND (i.InterviewDate > CURDATE()
-                               OR (i.InterviewDate = CURDATE() AND i.InterviewTime >= CURTIME()))";
+                          AND (
+                                i.InterviewDate > CURDATE()
+                                OR (i.InterviewDate = CURDATE() AND i.InterviewTime >= CURTIME())
+                              )";
 
-                    using (MySqlCommand command = new MySqlCommand(upcomingInterviewQuery, connection))
+                    using (MySqlCommand command = new MySqlCommand(interviewCountQuery, connection))
                     {
                         command.Parameters.AddWithValue("@ApplicantID", applicantId.Value);
                         upcomingInterviewCount = Convert.ToInt32(command.ExecuteScalar());
@@ -300,8 +302,10 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
                         INNER JOIN jobvacancies j ON a.JobVacancyID = j.JobVacancyID
                         WHERE a.ApplicantID = @ApplicantID
                           AND i.Status = 'Scheduled'
-                          AND (i.InterviewDate > CURDATE()
-                               OR (i.InterviewDate = CURDATE() AND i.InterviewTime >= CURTIME()))
+                          AND (
+                                i.InterviewDate > CURDATE()
+                                OR (i.InterviewDate = CURDATE() AND i.InterviewTime >= CURTIME())
+                              )
                         ORDER BY i.InterviewDate ASC, i.InterviewTime ASC
                         LIMIT 1";
 
@@ -344,6 +348,102 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
             catch (Exception ex)
             {
                 throw new Exception("Unexpected error: " + ex.Message);
+            }
+        }
+
+        public string GetApplicantFullName(int applicantAccountId)
+        {
+            try
+            {
+                using (MySqlConnection connection = _databaseConnector.GetConnection())
+                {
+                    connection.Open();
+
+                    string query = @"
+                        SELECT FirstName, MiddleName, LastName
+                        FROM applicants
+                        WHERE ApplicantAccountID = @ApplicantAccountID
+                        LIMIT 1";
+
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@ApplicantAccountID", applicantAccountId);
+
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                string firstName = reader["FirstName"].ToString();
+                                string middleName = reader["MiddleName"] == DBNull.Value ? "" : reader["MiddleName"].ToString();
+                                string lastName = reader["LastName"].ToString();
+
+                                string fullName = $"{firstName} {middleName} {lastName}";
+                                fullName = fullName.Replace("  ", " ").Trim();
+
+                                return string.IsNullOrWhiteSpace(fullName) ? "Applicant" : fullName;
+                            }
+                        }
+                    }
+                }
+
+                return "Applicant";
+            }
+            catch
+            {
+                return "Applicant";
+            }
+        }
+
+        public DateTime? GetApplicantLastLogin(int applicantAccountId)
+        {
+            try
+            {
+                using (MySqlConnection connection = _databaseConnector.GetConnection())
+                {
+                    connection.Open();
+
+                    string query = @"
+                        SELECT LastLoginAt
+                        FROM applicantaccounts
+                        WHERE ApplicantAccountID = @ApplicantAccountID
+                        LIMIT 1";
+
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@ApplicantAccountID", applicantAccountId);
+
+                        object result = command.ExecuteScalar();
+                        if (result == null || result == DBNull.Value)
+                        {
+                            return null;
+                        }
+
+                        return Convert.ToDateTime(result);
+                    }
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public void UpdateLastLogin(int applicantAccountId)
+        {
+            using (MySqlConnection connection = _databaseConnector.GetConnection())
+            {
+                connection.Open();
+
+                string query = @"
+                    UPDATE applicantaccounts
+                    SET LastLoginAt = NOW()
+                    WHERE ApplicantAccountID = @ApplicantAccountID";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ApplicantAccountID", applicantAccountId);
+                    command.ExecuteNonQuery();
+                }
             }
         }
     }

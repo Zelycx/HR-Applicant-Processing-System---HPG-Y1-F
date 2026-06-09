@@ -86,12 +86,15 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Applicant.Applicant_LogIn
             try
             {
                 LogInResult result = userService.AuthenticateApplicant(email, password);
+                userService.UpdateLastLogin(result.Account.ApplicantAccountID);
 
                 if (!result.Success)
                 {
                     new NotificationBox(result.Message).ShowDialog();
                     return;
                 }
+
+                userService.UpdateLastLogin(result.Account.ApplicantAccountID);
 
                 new NotificationBox(result.Message).ShowDialog();
 

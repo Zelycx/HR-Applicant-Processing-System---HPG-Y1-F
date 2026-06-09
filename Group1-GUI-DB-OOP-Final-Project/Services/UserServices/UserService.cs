@@ -153,5 +153,13 @@ namespace Group1_GUI_DB_OOP_Final_Project.Services.UserServices
                 Message = "Registration successful."
             };
         }
+
+        public void UpdateLastLogin(int applicantAccountId)
+        {
+            ApplicantDashboardServices dashboardService =
+                new ApplicantDashboardServices();
+
+            dashboardService.UpdateLastLogin(applicantAccountId);
+        }
     }
 }

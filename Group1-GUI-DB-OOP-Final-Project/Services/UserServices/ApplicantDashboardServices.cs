@@ -17,9 +17,9 @@ namespace Group1_GUI_DB_OOP_Final_Project.Services.UserServices
             _repository = new ApplicantDashboardRepository();
         }
 
-        public ApplicantDashboardSummary GetSummary(int applicantAccountId)
+        public ApplicantDashboardSummary GetDashboardSummary(int applicantAccountId)
         {
-            return _repository.GetSummary(applicantAccountId);
+            return _repository.GetDashboardSummary(applicantAccountId);
         }
 
         public List<ApplicantApplicationRowDTO> GetApplications(int applicantAccountId)
@@ -35,6 +35,21 @@ namespace Group1_GUI_DB_OOP_Final_Project.Services.UserServices
         public ApplicantInterviewDTO GetNearestInterview(int applicantAccountId)
         {
             return _repository.GetNearestInterview(applicantAccountId);
+        }
+
+        public string GetApplicantFullName(int applicantAccountId)
+        {
+            return _repository.GetApplicantFullName(applicantAccountId);
+        }
+
+        public DateTime? GetApplicantLastLogin(int applicantAccountId)
+        {
+            return _repository.GetApplicantLastLogin(applicantAccountId);
+        }
+
+        public void UpdateLastLogin(int applicantAccountId)
+        {
+            _repository.UpdateLastLogin(applicantAccountId);
         }
     }
 }
