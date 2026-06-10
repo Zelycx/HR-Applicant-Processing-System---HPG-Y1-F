@@ -28,12 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "JobVacanciesManagementForm";
+            btnBack = new Button();
+            SuspendLayout();
+            // 
+            // btnBack
+            // 
+            btnBack.Location = new Point(394, 256);
+            btnBack.Name = "btnBack";
+            btnBack.Size = new Size(75, 23);
+            btnBack.TabIndex = 0;
+            btnBack.Text = "Back";
+            btnBack.UseVisualStyleBackColor = true;
+            btnBack.Click += btnBack_Click;
+            // 
+            // JobVacanciesManagementForm
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(btnBack);
+            Name = "JobVacanciesManagementForm";
+            Text = "JobVacanciesManagementForm";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Button btnBack;
     }
 }

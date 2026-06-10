@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Group1_GUI_DB_OOP_Final_Project.Forms.HR;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,13 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR_Manager
         public JobVacanciesManagementForm()
         {
             InitializeComponent();
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            HRDashboard dashboard = new HRDashboard();
+            dashboard.Show();
+            this.Hide();
         }
     }
 }
