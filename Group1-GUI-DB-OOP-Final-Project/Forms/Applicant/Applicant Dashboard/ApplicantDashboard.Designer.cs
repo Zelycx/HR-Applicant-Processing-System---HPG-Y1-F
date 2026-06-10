@@ -88,6 +88,8 @@
             GoToStatusTracking = new Button();
             pictureBox2 = new PictureBox();
             panel19 = new Panel();
+            panel20 = new Panel();
+            label4 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel7.SuspendLayout();
@@ -109,6 +111,7 @@
             panel18.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            panel20.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -182,7 +185,7 @@
             panel7.BorderStyle = BorderStyle.FixedSingle;
             panel7.Controls.Add(panel10);
             panel7.Controls.Add(label5);
-            panel7.Location = new Point(1013, 156);
+            panel7.Location = new Point(1282, 153);
             panel7.Name = "panel7";
             panel7.Size = new Size(184, 113);
             panel7.TabIndex = 4;
@@ -223,7 +226,7 @@
             panel5.Controls.Add(panel4);
             panel5.Location = new Point(186, 117);
             panel5.Name = "panel5";
-            panel5.Size = new Size(821, 152);
+            panel5.Size = new Size(1090, 152);
             panel5.TabIndex = 0;
             // 
             // panel4
@@ -236,7 +239,7 @@
             panel4.Controls.Add(label2);
             panel4.Location = new Point(3, 3);
             panel4.Name = "panel4";
-            panel4.Size = new Size(815, 146);
+            panel4.Size = new Size(1084, 146);
             panel4.TabIndex = 1;
             // 
             // ApplicantLastLog
@@ -294,7 +297,7 @@
             panel6.BorderStyle = BorderStyle.FixedSingle;
             panel6.Controls.Add(panel11);
             panel6.Controls.Add(label6);
-            panel6.Location = new Point(1203, 156);
+            panel6.Location = new Point(1472, 153);
             panel6.Name = "panel6";
             panel6.Size = new Size(184, 113);
             panel6.TabIndex = 5;
@@ -335,7 +338,7 @@
             panel8.BorderStyle = BorderStyle.FixedSingle;
             panel8.Controls.Add(panel12);
             panel8.Controls.Add(label7);
-            panel8.Location = new Point(1393, 156);
+            panel8.Location = new Point(1662, 153);
             panel8.Name = "panel8";
             panel8.Size = new Size(231, 113);
             panel8.TabIndex = 5;
@@ -573,36 +576,40 @@
             // label12
             // 
             label12.AutoSize = true;
+            label12.Font = new Font("Century", 10.2F);
             label12.Location = new Point(30, 65);
             label12.Name = "label12";
-            label12.Size = new Size(68, 20);
+            label12.Size = new Size(83, 21);
             label12.TabIndex = 5;
             label12.Text = "Date      :";
             // 
             // label13
             // 
             label13.AutoSize = true;
+            label13.Font = new Font("Century", 10.2F);
             label13.Location = new Point(30, 101);
             label13.Name = "label13";
-            label13.Size = new Size(69, 20);
+            label13.Size = new Size(85, 21);
             label13.TabIndex = 4;
             label13.Text = "Time      :";
             // 
             // label14
             // 
             label14.AutoSize = true;
+            label14.Font = new Font("Century", 10.2F);
             label14.Location = new Point(30, 139);
             label14.Name = "label14";
-            label14.Size = new Size(67, 20);
+            label14.Size = new Size(84, 21);
             label14.TabIndex = 3;
-            label14.Text = "Mode    :";
+            label14.Text = "Mode     :";
             // 
             // label11
             // 
             label11.AutoSize = true;
+            label11.Font = new Font("Century", 10.2F);
             label11.Location = new Point(30, 25);
             label11.Name = "label11";
-            label11.Size = new Size(68, 20);
+            label11.Size = new Size(84, 21);
             label11.TabIndex = 0;
             label11.Text = "Position :";
             // 
@@ -661,7 +668,7 @@
             flowLayoutPanel1.Controls.Add(GoToJobVacancies);
             flowLayoutPanel1.Controls.Add(GoToMyDocuments);
             flowLayoutPanel1.Controls.Add(GoToStatusTracking);
-            flowLayoutPanel1.Location = new Point(1326, 642);
+            flowLayoutPanel1.Location = new Point(1559, 565);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(249, 338);
             flowLayoutPanel1.TabIndex = 12;
@@ -736,12 +743,34 @@
             panel19.Size = new Size(328, 10);
             panel19.TabIndex = 14;
             // 
+            // panel20
+            // 
+            panel20.BackColor = Color.LightSteelBlue;
+            panel20.Controls.Add(label4);
+            panel20.Location = new Point(1529, 501);
+            panel20.Name = "panel20";
+            panel20.Size = new Size(302, 61);
+            panel20.TabIndex = 15;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Century", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(97, 13);
+            label4.Name = "label4";
+            label4.RightToLeft = RightToLeft.No;
+            label4.Size = new Size(102, 22);
+            label4.TabIndex = 9;
+            label4.Text = "ACTIONS";
+            // 
             // ApplicantDashboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1902, 1033);
+            Controls.Add(panel20);
             Controls.Add(panel19);
             Controls.Add(pictureBox2);
             Controls.Add(flowLayoutPanel1);
@@ -790,6 +819,8 @@
             panel18.PerformLayout();
             flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            panel20.ResumeLayout(false);
+            panel20.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -854,5 +885,7 @@
         private Panel panel19;
         private DataGridViewTextBoxColumn JobRow;
         private DataGridViewTextBoxColumn MissReqRow;
+        private Panel panel20;
+        private Label label4;
     }
 }

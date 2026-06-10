@@ -205,7 +205,7 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Applicant
 
         private void GoToMyProfile_Click(object sender, EventArgs e)
         {
-            ApplicantProfile applicantPrf = new ApplicantProfile();
+            ApplicantProfile applicantPrf = new ApplicantProfile(_account);
             applicantPrf.Show();
             Close();
         }
