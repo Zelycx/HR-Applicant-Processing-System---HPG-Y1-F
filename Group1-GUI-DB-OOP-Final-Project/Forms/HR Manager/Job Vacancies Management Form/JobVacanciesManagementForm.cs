@@ -61,5 +61,53 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR_Manager
             txtRequiredDocuments.Clear();
             cmbStatus.SelectedIndex = -1;
         }
+
+        private void dgvVacancy_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvVacancy.Rows[e.RowIndex];
+
+                txtJobTitle.Text = row.Cells[0].Value.ToString();
+                txtDepartment.Text = row.Cells[1].Value.ToString();
+                txtQualifications.Text = row.Cells[2].Value.ToString();
+                txtRequiredDocuments.Text = row.Cells[3].Value.ToString();
+                cmbStatus.Text = row.Cells[4].Value.ToString();
+            }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (dgvVacancy.CurrentRow != null)
+            {
+                dgvVacancy.CurrentRow.Cells[0].Value = txtJobTitle.Text;
+                dgvVacancy.CurrentRow.Cells[1].Value = txtDepartment.Text;
+                dgvVacancy.CurrentRow.Cells[2].Value = txtQualifications.Text;
+                dgvVacancy.CurrentRow.Cells[3].Value = txtRequiredDocuments.Text;
+                dgvVacancy.CurrentRow.Cells[4].Value = cmbStatus.Text;
+
+                MessageBox.Show("Vacancy Updated Successfully!");
+            }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            if (dgvVacancy.CurrentRow != null)
+            {
+                dgvVacancy.CurrentRow.Cells[4].Value = "Closed";
+
+                MessageBox.Show("Vacancy Closed Successfully!");
+            }
+        }
+
+        private void btnReopen_Click(object sender, EventArgs e)
+        {
+            if (dgvVacancy.CurrentRow != null)
+            {
+                dgvVacancy.CurrentRow.Cells[4].Value = "Active";
+
+                MessageBox.Show("Vacancy Reopened Successfully!");
+            }
+        }
     }
 }

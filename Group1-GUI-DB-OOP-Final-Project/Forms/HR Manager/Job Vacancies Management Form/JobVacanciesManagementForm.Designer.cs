@@ -46,6 +46,9 @@
             label5 = new Label();
             cmbStatus = new ComboBox();
             btnAdd = new Button();
+            btnUpdate = new Button();
+            btnClose = new Button();
+            btnReopen = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvVacancy).BeginInit();
             SuspendLayout();
             // 
@@ -67,6 +70,7 @@
             dgvVacancy.Name = "dgvVacancy";
             dgvVacancy.Size = new Size(544, 85);
             dgvVacancy.TabIndex = 3;
+            dgvVacancy.CellClick += dgvVacancy_CellClick;
             dgvVacancy.CellContentClick += dgvVacancy_CellContentClick;
             // 
             // colJobTitle
@@ -189,11 +193,44 @@
             btnAdd.UseVisualStyleBackColor = true;
             btnAdd.Click += btnAdd_Click;
             // 
+            // btnUpdate
+            // 
+            btnUpdate.Location = new Point(163, 287);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new Size(75, 23);
+            btnUpdate.TabIndex = 8;
+            btnUpdate.Text = "Update";
+            btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += btnUpdate_Click;
+            // 
+            // btnClose
+            // 
+            btnClose.Location = new Point(244, 287);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new Size(75, 23);
+            btnClose.TabIndex = 8;
+            btnClose.Text = "Close Vacancy";
+            btnClose.UseVisualStyleBackColor = true;
+            btnClose.Click += btnClose_Click;
+            // 
+            // btnReopen
+            // 
+            btnReopen.Location = new Point(325, 287);
+            btnReopen.Name = "btnReopen";
+            btnReopen.Size = new Size(75, 23);
+            btnReopen.TabIndex = 9;
+            btnReopen.Text = "Reopen Vacancy";
+            btnReopen.UseVisualStyleBackColor = true;
+            btnReopen.Click += btnReopen_Click;
+            // 
             // JobVacanciesManagementForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnReopen);
+            Controls.Add(btnClose);
+            Controls.Add(btnUpdate);
             Controls.Add(btnAdd);
             Controls.Add(cmbStatus);
             Controls.Add(label5);
@@ -234,5 +271,8 @@
         private Label label5;
         private ComboBox cmbStatus;
         private Button btnAdd;
+        private Button btnUpdate;
+        private Button btnClose;
+        private Button btnReopen;
     }
 }
