@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnBack = new Button();
             dgvVacancy = new DataGridView();
             colJobTitle = new DataGridViewTextBoxColumn();
             colDepartment = new DataGridViewTextBoxColumn();
@@ -51,16 +50,6 @@
             btnReopen = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvVacancy).BeginInit();
             SuspendLayout();
-            // 
-            // btnBack
-            // 
-            btnBack.Location = new Point(394, 256);
-            btnBack.Name = "btnBack";
-            btnBack.Size = new Size(75, 23);
-            btnBack.TabIndex = 0;
-            btnBack.Text = "Back";
-            btnBack.UseVisualStyleBackColor = true;
-            btnBack.Click += btnBack_Click;
             // 
             // dgvVacancy
             // 
@@ -243,7 +232,6 @@
             Controls.Add(txtDepartment);
             Controls.Add(txtJobTitle);
             Controls.Add(dgvVacancy);
-            Controls.Add(btnBack);
             Name = "JobVacanciesManagementForm";
             Text = "JobVacanciesManagementForm";
             ((System.ComponentModel.ISupportInitialize)dgvVacancy).EndInit();
@@ -252,8 +240,6 @@
         }
 
         #endregion
-
-        private Button btnBack;
         private DataGridView dgvVacancy;
         private DataGridViewTextBoxColumn colJobTitle;
         private DataGridViewTextBoxColumn colDepartment;

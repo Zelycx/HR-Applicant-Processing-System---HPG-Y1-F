@@ -1,4 +1,5 @@
-﻿using Group1_GUI_DB_OOP_Final_Project.Forms.HR;
+﻿using Group1_GUI_DB_OOP_Final_Project.Database;
+using Group1_GUI_DB_OOP_Final_Project.Forms.HR;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,22 +9,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR_Manager
 {
     public partial class JobVacanciesManagementForm : Form
     {
+        MySqlConnection conn = DatabaseConnector.GetConnection();
         public JobVacanciesManagementForm()
         {
             InitializeComponent();
         }
 
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            HRDashboard dashboard = new HRDashboard();
-            dashboard.Show();
-            this.Hide();
-        }
 
         private void dgvVacancy_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -37,6 +34,26 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR_Manager
             dgvVacancy.Columns.Add("Status", "Status");
         }
 
+        public void LoadVacancies()
+        {
+            conn.Open();
+
+            string query = "SELECT * FROM job_vacancy";
+            MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            dgvVacancy.DataSource = dt;
+
+            conn.Close();
+        }
+
+        private void JobVacancyForm_Load(object sender, EventArgs e)
+        {
+            LoadVacancies();
+        }
+
         private void txtRequiredDocuments_TextChanged(object sender, EventArgs e)
         {
 
@@ -44,22 +61,27 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR_Manager
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            dgvVacancy.Rows.Add(
-            txtJobTitle.Text,
-            txtDepartment.Text,
-            txtQualifications.Text,
-            txtRequiredDocuments.Text,
-            cmbStatus.Text
-            );
+            MySqlConnection conn = DatabaseConnector.GetConnection();
 
-            MessageBox.Show("Vacancy Added Successfully!");
+            conn.Open();
 
-            // OPTIONAL: clear fields after adding
-            txtJobTitle.Clear();
-            txtDepartment.Clear();
-            txtQualifications.Clear();
-            txtRequiredDocuments.Clear();
-            cmbStatus.SelectedIndex = -1;
+            string query = "INSERT INTO job_vacancy (job_title, department, qualifications, required_documents, status) VALUES (@job_title, @department, @qualifications, @required_documents, @status)";
+
+            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+            cmd.Parameters.AddWithValue("@job_title", txtJobTitle.Text);
+            cmd.Parameters.AddWithValue("@department", txtDepartment.Text);
+            cmd.Parameters.AddWithValue("@qualifications", txtQualifications.Text);
+            cmd.Parameters.AddWithValue("@required_documents", txtRequiredDocuments.Text);
+            cmd.Parameters.AddWithValue("@status", cmbStatus.Text);
+
+            cmd.ExecuteNonQuery();
+
+            conn.Close();
+
+            MessageBox.Show("Saved to database!");
+
+            LoadVacancies();
         }
 
         private void dgvVacancy_CellClick(object sender, DataGridViewCellEventArgs e)
