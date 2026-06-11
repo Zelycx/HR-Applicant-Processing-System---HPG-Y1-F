@@ -39,7 +39,9 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR
 
         private void btnApplicants_Click(object sender, EventArgs e)
         {
-
+            ApplicantList form = new ApplicantList();
+            form.Show();
+            this.Hide();
         }
 
         private void btnReports_Click(object sender, EventArgs e)
