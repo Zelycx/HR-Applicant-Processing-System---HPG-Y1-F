@@ -1,5 +1,6 @@
-﻿using Group1_GUI_DB_OOP_Final_Project.Forms.Shared.Confirmation;
+using Group1_GUI_DB_OOP_Final_Project.Forms.Shared.Confirmation;
 using Group1_GUI_DB_OOP_Final_Project.Forms.Applicant.Applicant_LogIn;
+using Group1_GUI_DB_OOP_Final_Project.Forms.HR;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,6 +40,12 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Shared.UserTypeSelection
             applicantLogIn.Owner = this;
 
             applicantLogIn.Show();
+            this.Hide();
+        }
+        private void HRButton_Click(object sender, EventArgs e)
+        {
+            HRLogIn hrlogin = new HRLogIn();
+            hrlogin.Show();
             this.Hide();
         }
     }
