@@ -16,5 +16,17 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR
         {
             InitializeComponent();
         }
+
+        private void Screening_Load(object sender, EventArgs e)
+        {
+            dgvScreening.Rows.Add("A001", "Juan Dela Cruz", "IT Staff", "Pending");
+            dgvScreening.Rows.Add("A002", "Maria Santos", "HR Assistant", "Pending");
+            dgvScreening.Rows.Add("A003", "Jose Reyes", "Developer", "Pending");
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
