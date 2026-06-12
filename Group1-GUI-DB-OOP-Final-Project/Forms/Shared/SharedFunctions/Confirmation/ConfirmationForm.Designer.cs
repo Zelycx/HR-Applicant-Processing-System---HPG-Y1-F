@@ -32,7 +32,7 @@
             NoButton = new Button();
             panel1 = new Panel();
             panel2 = new Panel();
-            Message = new TextBox();
+            Message = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -90,12 +90,11 @@
             // 
             // Message
             // 
-            Message.BackColor = Color.WhiteSmoke;
-            Message.BorderStyle = BorderStyle.None;
-            Message.Font = new Font("Cambria", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Message.Location = new Point(50, 46);
+            Message.AutoSize = true;
+            Message.Font = new Font("Century", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Message.Location = new Point(84, 42);
             Message.Name = "Message";
-            Message.Size = new Size(321, 27);
+            Message.Size = new Size(0, 22);
             Message.TabIndex = 0;
             // 
             // ConfirmationForm
@@ -118,6 +117,6 @@
         private Button NoButton;
         private Panel panel1;
         private Panel panel2;
-        private TextBox Message;
+        private Label Message;
     }
 }

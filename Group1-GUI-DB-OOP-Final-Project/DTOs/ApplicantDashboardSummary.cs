@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Group1_GUI_DB_OOP_Final_Project.DTOs
+{
+    internal class ApplicantDashboardSummary
+    {
+        public int ApplicationCount { get; set; }
+        public int UpcomingInterviewCount { get; set; }
+        public string LatestStatus { get; set; }
+    }
+}

@@ -34,16 +34,16 @@
             ApplicantButton = new Button();
             pictureBox1 = new PictureBox();
             panel2 = new Panel();
-            panel3 = new Panel();
             pictureBox2 = new PictureBox();
+            panel3 = new Panel();
+
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
-            // 
+
             // ExitButton
-            // 
             ExitButton.BackColor = Color.LightSteelBlue;
             ExitButton.FlatAppearance.BorderSize = 0;
             ExitButton.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
@@ -59,9 +59,8 @@
             ExitButton.TextAlign = ContentAlignment.MiddleRight;
             ExitButton.UseVisualStyleBackColor = false;
             ExitButton.Click += ExitButton_Click;
-            // 
+
             // panel1
-            // 
             panel1.BackColor = SystemColors.Control;
             panel1.Controls.Add(HRButton);
             panel1.Controls.Add(ApplicantButton);
@@ -70,9 +69,8 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1578, 515);
             panel1.TabIndex = 1;
-            // 
+
             // HRButton
-            // 
             HRButton.BackColor = Color.LightBlue;
             HRButton.FlatAppearance.BorderSize = 0;
             HRButton.FlatAppearance.MouseOverBackColor = Color.CadetBlue;
@@ -86,9 +84,8 @@
             HRButton.Text = "HR PROFESSIONAL";
             HRButton.UseVisualStyleBackColor = false;
             HRButton.Click += HRButton_Click;
-            // 
+
             // ApplicantButton
-            // 
             ApplicantButton.BackColor = Color.White;
             ApplicantButton.FlatAppearance.BorderSize = 0;
             ApplicantButton.FlatAppearance.MouseOverBackColor = Color.Gray;
@@ -101,9 +98,9 @@
             ApplicantButton.TabIndex = 0;
             ApplicantButton.Text = "APPLICANT";
             ApplicantButton.UseVisualStyleBackColor = false;
-            // 
+            ApplicantButton.Click += ApplicantButton_Click;
+
             // pictureBox1
-            // 
             pictureBox1.BackgroundImage = Properties.Resources.Screenshot_2026_06_03_083713_removebg_preview;
             pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBox1.Location = new Point(499, 12);
@@ -112,9 +109,8 @@
             pictureBox1.Size = new Size(726, 214);
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
-            // 
+
             // panel2
-            // 
             panel2.BackColor = Color.FromArgb(0, 0, 64);
             panel2.Controls.Add(panel3);
             panel2.Controls.Add(pictureBox2);
@@ -126,18 +122,15 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1664, 226);
             panel2.TabIndex = 3;
-            // 
+
             // panel3
-            // 
             panel3.BackColor = Color.LightSlateGray;
-            panel3.Location = new Point(54, 10);
-            panel3.Margin = new Padding(3, 2, 3, 2);
+            panel3.Location = new Point(62, 13);
             panel3.Name = "panel3";
-            panel3.Size = new Size(9, 58);
+            panel3.Size = new Size(10, 77);
             panel3.TabIndex = 4;
-            // 
+
             // pictureBox2
-            // 
             pictureBox2.BackColor = Color.LightSteelBlue;
             pictureBox2.BackgroundImage = Properties.Resources._2367416_200;
             pictureBox2.BackgroundImageLayout = ImageLayout.Zoom;
@@ -147,9 +140,8 @@
             pictureBox2.Size = new Size(43, 58);
             pictureBox2.TabIndex = 3;
             pictureBox2.TabStop = false;
-            // 
+
             // UserTypeSelection
-            // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1664, 775);
@@ -158,6 +150,7 @@
             Margin = new Padding(3, 2, 3, 2);
             Name = "UserTypeSelection";
             Text = "UserTypeSelection";
+
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel2.ResumeLayout(false);

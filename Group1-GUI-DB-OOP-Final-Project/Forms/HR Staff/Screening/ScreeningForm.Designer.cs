@@ -1,6 +1,6 @@
-﻿namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR
+﻿namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR_Staff.Screening
 {
-    partial class Screening
+    partial class ScreeningForm
     {
         /// <summary>
         /// Required designer variable.
