@@ -54,7 +54,10 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Applicant
                 MNTextBox.Text = "";
                 LNTextBox.Text = "";
                 GenderSelection.SelectedIndex = -1;
-                BirthdateSelection.Value = DateTime.Today;
+
+                // Use MaxDate instead of Today
+                BirthdateSelection.Value = BirthdateSelection.MaxDate;
+
                 AddressTextBox.Text = "";
                 ContactNumberTextBox.Text = "";
                 EmailTextBox.Text = "";
@@ -75,11 +78,24 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Applicant
 
             if (profile.BirthDate.HasValue)
             {
-                BirthdateSelection.Value = profile.BirthDate.Value;
+                DateTime birthDate = profile.BirthDate.Value;
+
+                if (birthDate > BirthdateSelection.MaxDate)
+                {
+                    BirthdateSelection.Value = BirthdateSelection.MaxDate;
+                }
+                else if (birthDate < BirthdateSelection.MinDate)
+                {
+                    BirthdateSelection.Value = BirthdateSelection.MinDate;
+                }
+                else
+                {
+                    BirthdateSelection.Value = birthDate;
+                }
             }
             else
             {
-                BirthdateSelection.Value = DateTime.Today;
+                BirthdateSelection.Value = BirthdateSelection.MaxDate;
             }
 
             AddressTextBox.Text = profile.Address ?? "";

@@ -350,9 +350,9 @@
             label11.Font = new Font("Century", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label11.Location = new Point(53, 188);
             label11.Name = "label11";
-            label11.Size = new Size(122, 23);
+            label11.Size = new Size(171, 23);
             label11.TabIndex = 11;
-            label11.Text = "Year Level :";
+            label11.Text = "Education Level :";
             // 
             // label12
             // 

@@ -212,21 +212,21 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Applicant
 
         private void GoToJobVacancies_Click(object sender, EventArgs e)
         {
-            JobVacanciesWindow jobVacanciesWindow = new JobVacanciesWindow();
+            JobVacanciesWindow jobVacanciesWindow = new JobVacanciesWindow(_account);
             jobVacanciesWindow.Show();
             Close();
         }
 
         private void GoToMyDocuments_Click(object sender, EventArgs e)
         {
-            Document applicantDocument = new Document();
+            Document applicantDocument = new Document(_account);
             applicantDocument.Show();
             Close();
         }
 
         private void GoToStatusTracking_Click(object sender, EventArgs e)
         {
-            ApplicationStatus applicationStatus = new ApplicationStatus();
+            ApplicationStatus applicationStatus = new ApplicationStatus(_account);
             applicationStatus.Show();
             Close();
         }

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Group1_GUI_DB_OOP_Final_Project.Forms.HR;
 
 namespace Group1_GUI_DB_OOP_Final_Project.Forms.Shared.UserTypeSelection
 {
@@ -35,10 +36,14 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Shared.UserTypeSelection
         private void ApplicantButton_Click(object sender, EventArgs e)
         {
             ApplicantLogIn applicantLogIn = new ApplicantLogIn();
-
-            applicantLogIn.Owner = this;
-
             applicantLogIn.Show();
+            this.Hide();
+        }
+
+        private void HRButton_Click(object sender, EventArgs e)
+        {
+            HRLogIn hrLogIn = new HRLogIn();
+            hrLogIn.Show();
             this.Hide();
         }
     }

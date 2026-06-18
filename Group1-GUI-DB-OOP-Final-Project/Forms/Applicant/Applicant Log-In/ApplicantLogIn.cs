@@ -18,21 +18,21 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Applicant.Applicant_LogIn
 {
     public partial class ApplicantLogIn : Form
     {
+        private bool isVisible = false;
+
         public ApplicantLogIn()
         {
             InitializeComponent();
 
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
+            FormBorderStyle = FormBorderStyle.None;
+            WindowState = FormWindowState.Maximized;
         }
-
-        private bool isVisible = false; // put it in here, just being good ( a useless mistake that has been fixed )
 
         private void BackButton_Click(object sender, EventArgs e)
         {
             UserTypeSelection userTypeSelection = new UserTypeSelection();
             userTypeSelection.Show();
-            this.Close();
+            Close();
         }
 
         private void SeePasswordButton_Click(object sender, EventArgs e)
@@ -86,7 +86,6 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Applicant.Applicant_LogIn
             try
             {
                 LogInResult result = userService.AuthenticateApplicant(email, password);
-                userService.UpdateLastLogin(result.Account.ApplicantAccountID);
 
                 if (!result.Success)
                 {
@@ -100,7 +99,7 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Applicant.Applicant_LogIn
 
                 ApplicantDashboard dashboard = new ApplicantDashboard(result.Account);
                 dashboard.Show();
-                this.Hide();
+                Hide();
             }
             catch (Exception ex)
             {
@@ -112,7 +111,7 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Applicant.Applicant_LogIn
         {
             ApplicantRegistration applicantRegistration = new ApplicantRegistration();
             applicantRegistration.Show();
-            this.Close();
+            Close();
         }
     }
 }

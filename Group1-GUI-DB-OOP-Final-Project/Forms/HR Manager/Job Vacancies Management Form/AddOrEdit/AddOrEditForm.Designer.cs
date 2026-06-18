@@ -1,6 +1,6 @@
-﻿namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR
+﻿namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR_Manager.Job_Vacancies_Management_Form.AddOrEdit
 {
-    partial class InterviewManagement
+    partial class AddOrEditForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "InterviewManagement";
+            this.Text = "AddOrEditForm";
         }
 
         #endregion
