@@ -21,5 +21,9 @@ namespace Group1_GUI_DB_OOP_Final_Project.Services.HRServices
         {
             return _repository.GetApplicantReviewByApplicationID(applicationID);
         }
+        public List<HRApplicantDocumentDTO> GetDocumentsByApplicationID(int applicationID)
+        {
+            return _repository.GetDocumentsByApplicationID(applicationID);
+        }
     }
 }

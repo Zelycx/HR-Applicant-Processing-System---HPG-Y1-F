@@ -11,6 +11,7 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
 {
     internal class HRApplicantReviewRepository
     {
+
         private readonly DatabaseConnector _databaseConnector;
 
         public HRApplicantReviewRepository()
@@ -27,6 +28,7 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
                 string query = @"
                     SELECT
                         ap.ApplicationID,
+                        ap.CurrentStatus,
                         a.FirstName,
                         a.MiddleName,
                         a.LastName,
@@ -59,6 +61,7 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
                             return new HRApplicantReviewDTO
                             {
                                 ApplicationID = Convert.ToInt32(reader["ApplicationID"]),
+                                CurrentStatus = reader["CurrentStatus"]?.ToString(),
                                 FirstName = reader["FirstName"]?.ToString(),
                                 MiddleName = reader["MiddleName"]?.ToString(),
                                 LastName = reader["LastName"]?.ToString(),
@@ -81,6 +84,48 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
             }
 
             return null;
+        }
+
+        public List<HRApplicantDocumentDTO> GetDocumentsByApplicationID(int applicationID)
+        {
+            List<HRApplicantDocumentDTO> documents = new List<HRApplicantDocumentDTO>();
+
+            using (MySqlConnection conn = _databaseConnector.GetConnection())
+            {
+                conn.Open();
+
+                string query = @"
+            SELECT
+                ad.ApplicantDocumentID,
+                ad.FileName,
+                ad.FilePath,
+                rt.RequirementName
+            FROM applicantdocuments ad
+            INNER JOIN requirementtypes rt
+                ON ad.RequirementTypeID = rt.RequirementTypeID
+            WHERE ad.ApplicationID = @ApplicationID;";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ApplicationID", applicationID);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            documents.Add(new HRApplicantDocumentDTO
+                            {
+                                ApplicantDocumentID = Convert.ToInt32(reader["ApplicantDocumentID"]),
+                                FileName = reader["FileName"]?.ToString(),
+                                FilePath = reader["FilePath"]?.ToString(),
+                                RequirementType = reader["RequirementName"]?.ToString()
+                            });
+                        }
+                    }
+                }
+            }
+
+            return documents;
         }
     }
 }

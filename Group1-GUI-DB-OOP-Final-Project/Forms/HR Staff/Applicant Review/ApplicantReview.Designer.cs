@@ -67,6 +67,7 @@
             panel5 = new Panel();
             label2 = new Label();
             panel8 = new Panel();
+            ApplicantStatusLabel = new Label();
             panel9 = new Panel();
             label18 = new Label();
             panel10 = new Panel();
@@ -74,14 +75,14 @@
             panel11 = new Panel();
             Documents = new ListView();
             panel12 = new Panel();
+            label23 = new Label();
+            label22 = new Label();
+            label21 = new Label();
+            HiredBy = new TextBox();
+            InterviewedBy = new TextBox();
+            ScreenedBy = new TextBox();
             panel13 = new Panel();
             label20 = new Label();
-            ScreenedBy = new TextBox();
-            InterviewedBy = new TextBox();
-            HiredBy = new TextBox();
-            label21 = new Label();
-            label22 = new Label();
-            label23 = new Label();
             panel7.SuspendLayout();
             panel4.SuspendLayout();
             panel3.SuspendLayout();
@@ -497,11 +498,21 @@
             // panel8
             // 
             panel8.BackColor = Color.WhiteSmoke;
+            panel8.Controls.Add(ApplicantStatusLabel);
             panel8.Controls.Add(panel9);
             panel8.Location = new Point(1405, 202);
             panel8.Name = "panel8";
             panel8.Size = new Size(185, 190);
             panel8.TabIndex = 12;
+            // 
+            // ApplicantStatusLabel
+            // 
+            ApplicantStatusLabel.AutoSize = true;
+            ApplicantStatusLabel.Location = new Point(52, 133);
+            ApplicantStatusLabel.Name = "ApplicantStatusLabel";
+            ApplicantStatusLabel.Size = new Size(80, 20);
+            ApplicantStatusLabel.TabIndex = 2;
+            ApplicantStatusLabel.Text = "Temporary";
             // 
             // panel9
             // 
@@ -558,6 +569,7 @@
             Documents.Size = new Size(185, 364);
             Documents.TabIndex = 1;
             Documents.UseCompatibleStateImageBehavior = false;
+            Documents.SelectedIndexChanged += Documents_SelectedIndexChanged;
             // 
             // panel12
             // 
@@ -573,6 +585,57 @@
             panel12.Name = "panel12";
             panel12.Size = new Size(250, 508);
             panel12.TabIndex = 14;
+            // 
+            // label23
+            // 
+            label23.AutoSize = true;
+            label23.Location = new Point(24, 304);
+            label23.Name = "label23";
+            label23.Size = new Size(69, 20);
+            label23.TabIndex = 7;
+            label23.Text = "Hired By:";
+            // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Location = new Point(24, 213);
+            label22.Name = "label22";
+            label22.Size = new Size(109, 20);
+            label22.TabIndex = 6;
+            label22.Text = "Interviewed By:";
+            // 
+            // label21
+            // 
+            label21.AutoSize = true;
+            label21.Location = new Point(24, 131);
+            label21.Name = "label21";
+            label21.Size = new Size(93, 20);
+            label21.TabIndex = 5;
+            label21.Text = "Screened By:";
+            // 
+            // HiredBy
+            // 
+            HiredBy.BorderStyle = BorderStyle.FixedSingle;
+            HiredBy.Location = new Point(25, 333);
+            HiredBy.Name = "HiredBy";
+            HiredBy.Size = new Size(199, 27);
+            HiredBy.TabIndex = 4;
+            // 
+            // InterviewedBy
+            // 
+            InterviewedBy.BorderStyle = BorderStyle.FixedSingle;
+            InterviewedBy.Location = new Point(26, 241);
+            InterviewedBy.Name = "InterviewedBy";
+            InterviewedBy.Size = new Size(199, 27);
+            InterviewedBy.TabIndex = 3;
+            // 
+            // ScreenedBy
+            // 
+            ScreenedBy.BorderStyle = BorderStyle.FixedSingle;
+            ScreenedBy.Location = new Point(25, 162);
+            ScreenedBy.Name = "ScreenedBy";
+            ScreenedBy.Size = new Size(199, 27);
+            ScreenedBy.TabIndex = 2;
             // 
             // panel13
             // 
@@ -592,57 +655,6 @@
             label20.Size = new Size(100, 20);
             label20.TabIndex = 0;
             label20.Text = "ACTIVITY LOG";
-            // 
-            // ScreenedBy
-            // 
-            ScreenedBy.BorderStyle = BorderStyle.FixedSingle;
-            ScreenedBy.Location = new Point(25, 162);
-            ScreenedBy.Name = "ScreenedBy";
-            ScreenedBy.Size = new Size(199, 27);
-            ScreenedBy.TabIndex = 2;
-            // 
-            // InterviewedBy
-            // 
-            InterviewedBy.BorderStyle = BorderStyle.FixedSingle;
-            InterviewedBy.Location = new Point(26, 241);
-            InterviewedBy.Name = "InterviewedBy";
-            InterviewedBy.Size = new Size(199, 27);
-            InterviewedBy.TabIndex = 3;
-            // 
-            // HiredBy
-            // 
-            HiredBy.BorderStyle = BorderStyle.FixedSingle;
-            HiredBy.Location = new Point(25, 333);
-            HiredBy.Name = "HiredBy";
-            HiredBy.Size = new Size(199, 27);
-            HiredBy.TabIndex = 4;
-            // 
-            // label21
-            // 
-            label21.AutoSize = true;
-            label21.Location = new Point(24, 131);
-            label21.Name = "label21";
-            label21.Size = new Size(93, 20);
-            label21.TabIndex = 5;
-            label21.Text = "Screened By:";
-            // 
-            // label22
-            // 
-            label22.AutoSize = true;
-            label22.Location = new Point(24, 213);
-            label22.Name = "label22";
-            label22.Size = new Size(109, 20);
-            label22.TabIndex = 6;
-            label22.Text = "Interviewed By:";
-            // 
-            // label23
-            // 
-            label23.AutoSize = true;
-            label23.Location = new Point(24, 304);
-            label23.Name = "label23";
-            label23.Size = new Size(69, 20);
-            label23.TabIndex = 7;
-            label23.Text = "Hired By:";
             // 
             // ApplicantReview
             // 
@@ -673,6 +685,7 @@
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
             panel8.ResumeLayout(false);
+            panel8.PerformLayout();
             panel9.ResumeLayout(false);
             panel9.PerformLayout();
             panel10.ResumeLayout(false);
@@ -740,5 +753,6 @@
         private TextBox ScreenedBy;
         private Panel panel13;
         private Label label20;
+        private Label ApplicantStatusLabel;
     }
 }

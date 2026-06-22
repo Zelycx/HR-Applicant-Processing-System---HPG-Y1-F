@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -30,7 +31,9 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR
         private void ApplicantReview_Load(object sender, EventArgs e)
         {
             LoadApplicantData();
+            LoadApplicantDocuments();
         }
+
 
         private void LoadApplicantData()
         {
@@ -68,6 +71,7 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR
                 ScreenedBy.Text = applicant.ScreenedBy;
                 InterviewedBy.Text = applicant.InterviewedBy;
                 HiredBy.Text = applicant.HiredBy;
+                ApplicantStatusLabel.Text = applicant.CurrentStatus;
             }
             catch (Exception ex)
             {
@@ -81,5 +85,57 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR
             list.Show();
             this.Close();
         }
+
+        private void Documents_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void LoadApplicantDocuments()
+        {
+            try
+            {
+                Documents.Items.Clear();
+                Documents.View = View.Details;
+
+                List<HRApplicantDocumentDTO> docs =
+                    _reviewService.GetDocumentsByApplicationID(_applicationID);
+
+                foreach (var doc in docs)
+                {
+                    ListViewItem item = new ListViewItem(doc.FileName);
+                    item.SubItems.Add(doc.RequirementType);
+                    item.Tag = doc.FilePath; // store full path for opening later
+                    Documents.Items.Add(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void Documents_DoubleClick(object sender, EventArgs e)
+        {
+            if (Documents.SelectedItems.Count == 0)
+                return;
+
+            string filePath = Documents.SelectedItems[0].Tag as string;
+
+            if (string.IsNullOrWhiteSpace(filePath) || !System.IO.File.Exists(filePath))
+            {
+                MessageBox.Show("File not found.");
+                return;
+            }
+
+            try
+            {
+                Process.Start(new ProcessStartInfo(filePath) { UseShellExecute = true });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to open file: " + ex.Message);
+            }
+        }
+
     }
 }
