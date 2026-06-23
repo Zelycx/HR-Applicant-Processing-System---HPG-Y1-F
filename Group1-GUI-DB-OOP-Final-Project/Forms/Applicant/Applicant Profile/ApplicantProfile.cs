@@ -131,11 +131,167 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Applicant
                 return;
             }
 
+            // ==========================
+            // Validation
+            // ==========================
+
+            if (string.IsNullOrWhiteSpace(FNTextBox.Text))
+            {
+                MessageBox.Show("First Name is required.");
+                FNTextBox.Focus();
+                return;
+            }
+
+            if (FNTextBox.Text.Any(char.IsDigit))
+            {
+                MessageBox.Show("First Name cannot contain numbers.");
+                FNTextBox.Focus();
+                return;
+            }
+
+            if (!string.IsNullOrWhiteSpace(MNTextBox.Text) &&
+                MNTextBox.Text.Any(char.IsDigit))
+            {
+                MessageBox.Show("Middle Name cannot contain numbers.");
+                MNTextBox.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(LNTextBox.Text))
+            {
+                MessageBox.Show("Last Name is required.");
+                LNTextBox.Focus();
+                return;
+            }
+
+            if (LNTextBox.Text.Any(char.IsDigit))
+            {
+                MessageBox.Show("Last Name cannot contain numbers.");
+                LNTextBox.Focus();
+                return;
+            }
+
+            if (GenderSelection.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select your gender.");
+                GenderSelection.Focus();
+                return;
+            }
+
+            int age = DateTime.Today.Year - BirthdateSelection.Value.Year;
+
+            if (BirthdateSelection.Value.Date > DateTime.Today.AddYears(-age))
+                age--;
+
+            if (age < 18)
+            {
+                MessageBox.Show("Applicant must be at least 18 years old.");
+                BirthdateSelection.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(ContactNumberTextBox.Text))
+            {
+                MessageBox.Show("Contact Number is required.");
+                ContactNumberTextBox.Focus();
+                return;
+            }
+
+            if (!ContactNumberTextBox.Text.All(char.IsDigit))
+            {
+                MessageBox.Show("Contact Number must contain numbers only.");
+                ContactNumberTextBox.Focus();
+                return;
+            }
+
+            if (ContactNumberTextBox.Text.Length != 11)
+            {
+                MessageBox.Show("Contact Number must be exactly 11 digits.");
+                ContactNumberTextBox.Focus();
+                return;
+            }
+
+            if (!ContactNumberTextBox.Text.StartsWith("09"))
+            {
+                MessageBox.Show("Contact Number must start with 09.");
+                ContactNumberTextBox.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(EmailTextBox.Text))
+            {
+                MessageBox.Show("Email is required.");
+                EmailTextBox.Focus();
+                return;
+            }
+
+            try
+            {
+                var email = new System.Net.Mail.MailAddress(EmailTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Please enter a valid email address.");
+                EmailTextBox.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(AddressTextBox.Text))
+            {
+                MessageBox.Show("Address is required.");
+                AddressTextBox.Focus();
+                return;
+            }
+
+            if (AddressTextBox.Text.Trim().Length < 10)
+            {
+                MessageBox.Show("Please enter a complete address.");
+                AddressTextBox.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(SchoolTextBox.Text))
+            {
+                MessageBox.Show("School is required.");
+                SchoolTextBox.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(CourseTextBox.Text))
+            {
+                MessageBox.Show("Course/Strand is required.");
+                CourseTextBox.Focus();
+                return;
+            }
+
+            if (CourseTextBox.Text.All(char.IsDigit))
+            {
+                MessageBox.Show("Please enter a valid Course/Strand.");
+                CourseTextBox.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(YearLevelTextBox.Text))
+            {
+                MessageBox.Show("Education Level is required.");
+                YearLevelTextBox.Focus();
+                return;
+            }
+
+            // ==========================
+            // Confirmation
+            // ==========================
+
             ConfirmationForm confirm = new ConfirmationForm("Save your profile changes?");
+
             if (confirm.ShowDialog() != DialogResult.Yes)
             {
                 return;
             }
+
+            // ==========================
+            // Save
+            // ==========================
 
             ApplicantProfileDTO dto = new ApplicantProfileDTO
             {
@@ -156,11 +312,24 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Applicant
             };
 
             ProfileSaveResultDTO result = _profileService.SaveProfile(dto);
-            MessageBox.Show(result.Message);
 
             if (result.Success)
             {
+                MessageBox.Show(
+                    result.Message,
+                    "Success",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
                 LoadProfileData();
+            }
+            else
+            {
+                MessageBox.Show(
+                    result.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
     }

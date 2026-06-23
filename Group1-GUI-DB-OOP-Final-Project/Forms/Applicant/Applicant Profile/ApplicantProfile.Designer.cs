@@ -83,8 +83,9 @@
             panel1.BackColor = Color.MidnightBlue;
             panel1.Controls.Add(label1);
             panel1.Location = new Point(1, 0);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1929, 152);
+            panel1.Size = new Size(1688, 114);
             panel1.TabIndex = 0;
             // 
             // label1
@@ -92,9 +93,9 @@
             label1.AutoSize = true;
             label1.Font = new Font("Century", 25.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(64, 45);
+            label1.Location = new Point(56, 34);
             label1.Name = "label1";
-            label1.Size = new Size(311, 54);
+            label1.Size = new Size(246, 41);
             label1.TabIndex = 0;
             label1.Text = "MY PROFILE";
             // 
@@ -103,9 +104,9 @@
             label2.AutoSize = true;
             label2.Font = new Font("Century", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(-7, 6);
+            label2.Location = new Point(4, 4);
             label2.Name = "label2";
-            label2.Size = new Size(400, 33);
+            label2.Size = new Size(316, 27);
             label2.TabIndex = 1;
             label2.Text = "PERSONAL INFORMATION";
             // 
@@ -125,87 +126,94 @@
             panel2.Controls.Add(label10);
             panel2.Controls.Add(label5);
             panel2.Controls.Add(panel5);
-            panel2.Location = new Point(155, 194);
+            panel2.Location = new Point(136, 146);
+            panel2.Margin = new Padding(3, 2, 3, 2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1387, 254);
+            panel2.Size = new Size(1214, 190);
             panel2.TabIndex = 2;
             // 
             // LNTextBox
             // 
             LNTextBox.BorderStyle = BorderStyle.FixedSingle;
-            LNTextBox.Location = new Point(183, 183);
+            LNTextBox.Location = new Point(160, 137);
+            LNTextBox.Margin = new Padding(3, 2, 3, 2);
             LNTextBox.Name = "LNTextBox";
-            LNTextBox.Size = new Size(328, 27);
+            LNTextBox.Size = new Size(287, 23);
             LNTextBox.TabIndex = 18;
             // 
             // label17
             // 
             label17.AutoSize = true;
             label17.Font = new Font("Century", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label17.Location = new Point(32, 183);
+            label17.Location = new Point(28, 137);
             label17.Name = "label17";
-            label17.Size = new Size(148, 23);
+            label17.Size = new Size(114, 20);
             label17.TabIndex = 17;
             label17.Text = "Last Name     :";
             // 
             // MNTextBox
             // 
             MNTextBox.BorderStyle = BorderStyle.FixedSingle;
-            MNTextBox.Location = new Point(183, 125);
+            MNTextBox.Location = new Point(160, 94);
+            MNTextBox.Margin = new Padding(3, 2, 3, 2);
             MNTextBox.Name = "MNTextBox";
-            MNTextBox.Size = new Size(328, 27);
+            MNTextBox.Size = new Size(287, 23);
             MNTextBox.TabIndex = 16;
             // 
             // label16
             // 
             label16.AutoSize = true;
             label16.Font = new Font("Century", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label16.Location = new Point(32, 125);
+            label16.Location = new Point(28, 94);
             label16.Name = "label16";
-            label16.Size = new Size(146, 23);
+            label16.Size = new Size(116, 20);
             label16.TabIndex = 15;
             label16.Text = "Middle Name :";
             // 
             // EmailTextBox
             // 
             EmailTextBox.BorderStyle = BorderStyle.FixedSingle;
-            EmailTextBox.Location = new Point(709, 183);
+            EmailTextBox.Location = new Point(620, 137);
+            EmailTextBox.Margin = new Padding(3, 2, 3, 2);
             EmailTextBox.Name = "EmailTextBox";
             EmailTextBox.ReadOnly = true;
-            EmailTextBox.Size = new Size(644, 27);
+            EmailTextBox.Size = new Size(564, 23);
             EmailTextBox.TabIndex = 14;
             // 
             // ContactNumberTextBox
             // 
             ContactNumberTextBox.BorderStyle = BorderStyle.FixedSingle;
-            ContactNumberTextBox.Location = new Point(709, 126);
+            ContactNumberTextBox.Location = new Point(620, 94);
+            ContactNumberTextBox.Margin = new Padding(3, 2, 3, 2);
             ContactNumberTextBox.Name = "ContactNumberTextBox";
-            ContactNumberTextBox.Size = new Size(644, 27);
+            ContactNumberTextBox.Size = new Size(564, 23);
             ContactNumberTextBox.TabIndex = 13;
             // 
             // AddressTextBox
             // 
             AddressTextBox.BorderStyle = BorderStyle.FixedSingle;
-            AddressTextBox.Location = new Point(708, 75);
+            AddressTextBox.Location = new Point(620, 56);
+            AddressTextBox.Margin = new Padding(3, 2, 3, 2);
             AddressTextBox.Name = "AddressTextBox";
-            AddressTextBox.Size = new Size(645, 27);
+            AddressTextBox.Size = new Size(565, 23);
             AddressTextBox.TabIndex = 12;
             // 
             // FNTextBox
             // 
             FNTextBox.BorderStyle = BorderStyle.FixedSingle;
-            FNTextBox.Location = new Point(183, 74);
+            FNTextBox.Location = new Point(160, 56);
+            FNTextBox.Margin = new Padding(3, 2, 3, 2);
             FNTextBox.Name = "FNTextBox";
-            FNTextBox.Size = new Size(328, 27);
+            FNTextBox.Size = new Size(287, 23);
             FNTextBox.TabIndex = 9;
             // 
             // label8
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Century", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.Location = new Point(527, 182);
+            label8.Location = new Point(461, 136);
             label8.Name = "label8";
-            label8.Size = new Size(77, 23);
+            label8.Size = new Size(62, 20);
             label8.TabIndex = 8;
             label8.Text = "Email :";
             // 
@@ -213,9 +221,9 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Century", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label9.Location = new Point(527, 125);
+            label9.Location = new Point(461, 94);
             label9.Name = "label9";
-            label9.Size = new Size(176, 23);
+            label9.Size = new Size(140, 20);
             label9.TabIndex = 7;
             label9.Text = "Contact Number :";
             // 
@@ -223,9 +231,9 @@
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Century", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label10.Location = new Point(527, 76);
+            label10.Location = new Point(461, 57);
             label10.Name = "label10";
-            label10.Size = new Size(95, 23);
+            label10.Size = new Size(76, 20);
             label10.TabIndex = 6;
             label10.Text = "Address :";
             // 
@@ -233,9 +241,9 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Century", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(32, 74);
+            label5.Location = new Point(28, 56);
             label5.Name = "label5";
-            label5.Size = new Size(146, 23);
+            label5.Size = new Size(113, 20);
             label5.TabIndex = 3;
             label5.Text = "First Name    :";
             // 
@@ -244,24 +252,27 @@
             panel5.BackColor = Color.SlateGray;
             panel5.Controls.Add(label2);
             panel5.Location = new Point(1, 1);
+            panel5.Margin = new Padding(3, 2, 3, 2);
             panel5.Name = "panel5";
-            panel5.Size = new Size(1387, 48);
+            panel5.Size = new Size(1214, 36);
             panel5.TabIndex = 2;
             // 
             // GenderSelection
             // 
             GenderSelection.FormattingEnabled = true;
-            GenderSelection.Location = new Point(183, 22);
+            GenderSelection.Location = new Point(160, 16);
+            GenderSelection.Margin = new Padding(3, 2, 3, 2);
             GenderSelection.Name = "GenderSelection";
-            GenderSelection.Size = new Size(262, 28);
+            GenderSelection.Size = new Size(230, 23);
             GenderSelection.TabIndex = 11;
             // 
             // BirthdateSelection
             // 
-            BirthdateSelection.Location = new Point(183, 79);
+            BirthdateSelection.Location = new Point(160, 59);
+            BirthdateSelection.Margin = new Padding(3, 2, 3, 2);
             BirthdateSelection.MaxDate = new DateTime(2026, 6, 10, 8, 4, 38, 0);
             BirthdateSelection.Name = "BirthdateSelection";
-            BirthdateSelection.Size = new Size(262, 27);
+            BirthdateSelection.Size = new Size(230, 23);
             BirthdateSelection.TabIndex = 10;
             BirthdateSelection.Value = new DateTime(2026, 6, 10, 0, 0, 0, 0);
             // 
@@ -269,9 +280,9 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Century", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label7.Location = new Point(32, 79);
+            label7.Location = new Point(28, 59);
             label7.Name = "label7";
-            label7.Size = new Size(147, 23);
+            label7.Size = new Size(113, 20);
             label7.TabIndex = 5;
             label7.Text = "Birthdate       :";
             // 
@@ -279,9 +290,9 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Century", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.Location = new Point(32, 22);
+            label6.Location = new Point(28, 16);
             label6.Name = "label6";
-            label6.Size = new Size(150, 23);
+            label6.Size = new Size(111, 20);
             label6.TabIndex = 4;
             label6.Text = "Gender           :";
             // 
@@ -295,33 +306,37 @@
             panel3.Controls.Add(label11);
             panel3.Controls.Add(label12);
             panel3.Controls.Add(label13);
-            panel3.Location = new Point(682, 454);
+            panel3.Location = new Point(597, 340);
+            panel3.Margin = new Padding(3, 2, 3, 2);
             panel3.Name = "panel3";
-            panel3.Size = new Size(860, 254);
+            panel3.Size = new Size(752, 190);
             panel3.TabIndex = 3;
             // 
             // YearLevelTextBox
             // 
             YearLevelTextBox.BorderStyle = BorderStyle.FixedSingle;
-            YearLevelTextBox.Location = new Point(224, 184);
+            YearLevelTextBox.Location = new Point(196, 138);
+            YearLevelTextBox.Margin = new Padding(3, 2, 3, 2);
             YearLevelTextBox.Name = "YearLevelTextBox";
-            YearLevelTextBox.Size = new Size(314, 27);
+            YearLevelTextBox.Size = new Size(275, 23);
             YearLevelTextBox.TabIndex = 17;
             // 
             // CourseTextBox
             // 
             CourseTextBox.BorderStyle = BorderStyle.FixedSingle;
-            CourseTextBox.Location = new Point(224, 131);
+            CourseTextBox.Location = new Point(196, 98);
+            CourseTextBox.Margin = new Padding(3, 2, 3, 2);
             CourseTextBox.Name = "CourseTextBox";
-            CourseTextBox.Size = new Size(314, 27);
+            CourseTextBox.Size = new Size(275, 23);
             CourseTextBox.TabIndex = 16;
             // 
             // SchoolTextBox
             // 
             SchoolTextBox.BorderStyle = BorderStyle.FixedSingle;
-            SchoolTextBox.Location = new Point(224, 86);
+            SchoolTextBox.Location = new Point(196, 64);
+            SchoolTextBox.Margin = new Padding(3, 2, 3, 2);
             SchoolTextBox.Name = "SchoolTextBox";
-            SchoolTextBox.Size = new Size(314, 27);
+            SchoolTextBox.Size = new Size(275, 23);
             SchoolTextBox.TabIndex = 15;
             // 
             // panel6
@@ -329,8 +344,9 @@
             panel6.BackColor = Color.SlateGray;
             panel6.Controls.Add(label3);
             panel6.Location = new Point(1, -1);
+            panel6.Margin = new Padding(3, 2, 3, 2);
             panel6.Name = "panel6";
-            panel6.Size = new Size(859, 48);
+            panel6.Size = new Size(752, 36);
             panel6.TabIndex = 3;
             // 
             // label3
@@ -338,9 +354,9 @@
             label3.AutoSize = true;
             label3.Font = new Font("Century", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(-7, 6);
+            label3.Location = new Point(3, 4);
             label3.Name = "label3";
-            label3.Size = new Size(456, 33);
+            label3.Size = new Size(359, 27);
             label3.TabIndex = 1;
             label3.Text = "EDUCATIONAL BACKGROUND";
             // 
@@ -348,9 +364,9 @@
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Century", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label11.Location = new Point(53, 188);
+            label11.Location = new Point(46, 141);
             label11.Name = "label11";
-            label11.Size = new Size(171, 23);
+            label11.Size = new Size(138, 20);
             label11.TabIndex = 11;
             label11.Text = "Education Level :";
             // 
@@ -358,9 +374,9 @@
             // 
             label12.AutoSize = true;
             label12.Font = new Font("Century", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label12.Location = new Point(53, 135);
+            label12.Location = new Point(46, 101);
             label12.Name = "label12";
-            label12.Size = new Size(156, 23);
+            label12.Size = new Size(124, 20);
             label12.TabIndex = 10;
             label12.Text = "Course/Strand :";
             // 
@@ -368,9 +384,9 @@
             // 
             label13.AutoSize = true;
             label13.Font = new Font("Century", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label13.Location = new Point(53, 86);
+            label13.Location = new Point(46, 64);
             label13.Name = "label13";
-            label13.Size = new Size(82, 23);
+            label13.Size = new Size(65, 20);
             label13.TabIndex = 9;
             label13.Text = "School :";
             // 
@@ -381,24 +397,27 @@
             panel4.Controls.Add(SkillTextBox);
             panel4.Controls.Add(label14);
             panel4.Controls.Add(label15);
-            panel4.Location = new Point(155, 714);
+            panel4.Location = new Point(136, 536);
+            panel4.Margin = new Padding(3, 2, 3, 2);
             panel4.Name = "panel4";
-            panel4.Size = new Size(1387, 254);
+            panel4.Size = new Size(1214, 190);
             panel4.TabIndex = 3;
             // 
             // ExperienceTextBox
             // 
-            ExperienceTextBox.Location = new Point(183, 64);
+            ExperienceTextBox.Location = new Point(160, 48);
+            ExperienceTextBox.Margin = new Padding(3, 2, 3, 2);
             ExperienceTextBox.Name = "ExperienceTextBox";
-            ExperienceTextBox.Size = new Size(439, 179);
+            ExperienceTextBox.Size = new Size(385, 135);
             ExperienceTextBox.TabIndex = 20;
             ExperienceTextBox.Text = "";
             // 
             // SkillTextBox
             // 
-            SkillTextBox.Location = new Point(722, 64);
+            SkillTextBox.Location = new Point(632, 48);
+            SkillTextBox.Margin = new Padding(3, 2, 3, 2);
             SkillTextBox.Name = "SkillTextBox";
-            SkillTextBox.Size = new Size(512, 179);
+            SkillTextBox.Size = new Size(448, 135);
             SkillTextBox.TabIndex = 19;
             SkillTextBox.Text = "";
             // 
@@ -406,9 +425,9 @@
             // 
             label14.AutoSize = true;
             label14.Font = new Font("Century", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label14.Location = new Point(632, 64);
+            label14.Location = new Point(553, 48);
             label14.Name = "label14";
-            label14.Size = new Size(74, 23);
+            label14.Size = new Size(58, 20);
             label14.TabIndex = 13;
             label14.Text = "Skills :";
             // 
@@ -416,9 +435,9 @@
             // 
             label15.AutoSize = true;
             label15.Font = new Font("Century", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label15.Location = new Point(53, 64);
+            label15.Location = new Point(46, 48);
             label15.Name = "label15";
-            label15.Size = new Size(124, 23);
+            label15.Size = new Size(100, 20);
             label15.TabIndex = 12;
             label15.Text = "Experience :";
             // 
@@ -426,9 +445,10 @@
             // 
             panel7.BackColor = Color.SlateGray;
             panel7.Controls.Add(label4);
-            panel7.Location = new Point(156, 714);
+            panel7.Location = new Point(136, 536);
+            panel7.Margin = new Padding(3, 2, 3, 2);
             panel7.Name = "panel7";
-            panel7.Size = new Size(1387, 48);
+            panel7.Size = new Size(1214, 36);
             panel7.TabIndex = 4;
             // 
             // label4
@@ -436,9 +456,9 @@
             label4.AutoSize = true;
             label4.Font = new Font("Century", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(-7, 6);
+            label4.Location = new Point(-6, 4);
             label4.Name = "label4";
-            label4.Size = new Size(504, 33);
+            label4.Size = new Size(397, 27);
             label4.TabIndex = 1;
             label4.Text = "WORK EXPERIENCE ( OPTIONAL )";
             // 
@@ -448,9 +468,10 @@
             SaveButton.FlatAppearance.BorderSize = 2;
             SaveButton.FlatStyle = FlatStyle.Flat;
             SaveButton.Font = new Font("Century", 10.2F);
-            SaveButton.Location = new Point(1571, 195);
+            SaveButton.Location = new Point(1375, 146);
+            SaveButton.Margin = new Padding(3, 2, 3, 2);
             SaveButton.Name = "SaveButton";
-            SaveButton.Size = new Size(189, 119);
+            SaveButton.Size = new Size(165, 89);
             SaveButton.TabIndex = 5;
             SaveButton.Text = "Save Changes";
             SaveButton.UseVisualStyleBackColor = true;
@@ -462,9 +483,10 @@
             BackButton.FlatAppearance.BorderSize = 2;
             BackButton.FlatStyle = FlatStyle.Flat;
             BackButton.Font = new Font("Century", 10.2F);
-            BackButton.Location = new Point(1571, 339);
+            BackButton.Location = new Point(1375, 254);
+            BackButton.Margin = new Padding(3, 2, 3, 2);
             BackButton.Name = "BackButton";
-            BackButton.Size = new Size(189, 119);
+            BackButton.Size = new Size(165, 89);
             BackButton.TabIndex = 6;
             BackButton.Text = "Dashboard";
             BackButton.UseVisualStyleBackColor = true;
@@ -477,17 +499,18 @@
             panel8.Controls.Add(label6);
             panel8.Controls.Add(label7);
             panel8.Controls.Add(BirthdateSelection);
-            panel8.Location = new Point(155, 410);
+            panel8.Location = new Point(136, 308);
+            panel8.Margin = new Padding(3, 2, 3, 2);
             panel8.Name = "panel8";
-            panel8.Size = new Size(514, 169);
+            panel8.Size = new Size(450, 127);
             panel8.TabIndex = 7;
             // 
             // ApplicantProfile
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1902, 1033);
+            ClientSize = new Size(1199, 749);
             Controls.Add(panel8);
             Controls.Add(BackButton);
             Controls.Add(SaveButton);
@@ -496,6 +519,7 @@
             Controls.Add(panel3);
             Controls.Add(panel1);
             Controls.Add(panel2);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "ApplicantProfile";
             Text = "ApplicantProfile";
             panel1.ResumeLayout(false);
