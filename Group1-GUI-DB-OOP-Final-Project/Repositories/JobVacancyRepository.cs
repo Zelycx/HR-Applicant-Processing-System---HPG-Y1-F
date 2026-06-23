@@ -403,5 +403,26 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
                 }
             }
         }
+
+        public void UpdateJobStatus(int jobVacancyId, string status)
+        {
+            using (MySqlConnection conn = _db.GetConnection())
+            {
+                conn.Open();
+
+                string sql = @"
+            UPDATE jobvacancies
+            SET Status = @Status
+            WHERE JobVacancyID = @JobVacancyID;";
+
+                using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Status", status);
+                    cmd.Parameters.AddWithValue("@JobVacancyID", jobVacancyId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

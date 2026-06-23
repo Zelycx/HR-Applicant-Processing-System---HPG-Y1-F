@@ -41,5 +41,19 @@ namespace Group1_GUI_DB_OOP_Final_Project.Services.HRServices
         {
             _repo.UpdateVacancy(jobVacancyId, jobTitle, jobDescription, qualifications, departmentId, employmentTypeId);
         }
+
+        public void ToggleJobStatus(int jobVacancyId, string currentStatus)
+        {
+            string newStatus;
+
+            if (currentStatus == "Open")
+                newStatus = "Closed";
+            else if (currentStatus == "Closed")
+                newStatus = "Open";
+            else
+                throw new Exception("Invalid job status.");
+
+            _repo.UpdateJobStatus(jobVacancyId, newStatus);
+        }
     }
 }

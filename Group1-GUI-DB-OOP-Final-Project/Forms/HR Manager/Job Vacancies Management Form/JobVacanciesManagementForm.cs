@@ -18,6 +18,18 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR_Manager
     public partial class JobVacanciesManagementForm : Form
     {
         DatabaseConnector db = new DatabaseConnector();
+        private string GetSelectedJobStatus()
+        {
+            if (dgvVacancies.SelectedRows.Count == 0)
+                return "";
+
+            var value = dgvVacancies.SelectedRows[0].Cells["Status"].Value;
+
+            if (value == null)
+                return "";
+
+            return value.ToString();
+        }
 
         private int GetSelectedJobVacancy()
         {
@@ -66,7 +78,15 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR_Manager
 
         private void CloseOrReopenButton_Click(object sender, EventArgs e)
         {
+            int id = GetSelectedJobVacancy();
+            if (id == 0) return;
 
+            string status = GetSelectedJobStatus();
+
+            _service.ToggleJobStatus(id, status);
+
+            MessageBox.Show("Job status updated successfully.");
+            LoadVacancies();
         }
 
         private void JobVacanciesManagementForm_Load(object sender, EventArgs e)
