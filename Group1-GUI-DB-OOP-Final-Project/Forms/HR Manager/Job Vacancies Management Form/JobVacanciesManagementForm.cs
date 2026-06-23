@@ -1,4 +1,9 @@
-﻿using System;
+﻿using Group1_GUI_DB_OOP_Final_Project.Database;
+using Group1_GUI_DB_OOP_Final_Project.DTOs;
+using Group1_GUI_DB_OOP_Final_Project.Forms.HR_Manager.Job_Vacancies_Management_Form.AddOrEdit;
+using Group1_GUI_DB_OOP_Final_Project.Services.HRServices;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +17,64 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR_Manager
 {
     public partial class JobVacanciesManagementForm : Form
     {
+        DatabaseConnector db = new DatabaseConnector();
+
+        private int GetSelectedJobVacancy()
+        {
+            if (dgvVacancies.SelectedRows.Count == 0)
+                return 0;
+
+            var row = dgvVacancies.SelectedRows[0];
+
+            if (row.Cells["JobVacancyID"].Value == null)
+                return 0;
+
+            return Convert.ToInt32(row.Cells["JobVacancyID"].Value);
+        }
+
+        private JobVacancyService _service = new JobVacancyService();
+
+        private void LoadVacancies()
+        {
+            dgvVacancies.DataSource = _service.GetAllVacancies(textBox1.Text);
+        }
+
         public JobVacanciesManagementForm()
         {
             InitializeComponent();
+            LoadVacancies();
+        }
+
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            AddOrEditForm form = new AddOrEditForm(0);
+            form.ShowDialog();
+            LoadVacancies();
+        }
+
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+            int id = GetSelectedJobVacancy();
+
+            if (id == 0) return;
+
+            AddOrEditForm form = new AddOrEditForm(id);
+            form.ShowDialog();
+
+            LoadVacancies();
+        }
+
+        private void CloseOrReopenButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void JobVacanciesManagementForm_Load(object sender, EventArgs e)
+        {
+            dgvVacancies.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvVacancies.MultiSelect = false;
+
+            LoadVacancies();
         }
     }
 }

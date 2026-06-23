@@ -26,5 +26,20 @@ namespace Group1_GUI_DB_OOP_Final_Project.Services.HRServices
         {
             return _repo.Apply(applicantAccountId, jobVacancyId);
         }
+
+        public List<JobVacancyListDTO> GetAllVacancies(string searchText)
+        {
+            return _repo.GetAllVacancies(searchText);
+        }
+
+        public void AddVacancy(string jobTitle, string jobDescription, string qualifications, int departmentId, int employmentTypeId)
+        {
+            _repo.AddVacancy(jobTitle, jobDescription, qualifications, departmentId, employmentTypeId);
+        }
+
+        public void UpdateVacancy(int jobVacancyId, string jobTitle, string jobDescription, string qualifications, int departmentId, int employmentTypeId)
+        {
+            _repo.UpdateVacancy(jobVacancyId, jobTitle, jobDescription, qualifications, departmentId, employmentTypeId);
+        }
     }
 }
