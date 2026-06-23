@@ -34,5 +34,6 @@ namespace Group1_GUI_DB_OOP_Final_Project.DTOs
         public string ScreenedBy { get; set; }
         public string InterviewedBy { get; set; }
         public string HiredBy { get; set; }
+        public string CurrentStatus { get; set; }
     }
 }
