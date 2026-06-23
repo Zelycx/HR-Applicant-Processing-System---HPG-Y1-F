@@ -35,7 +35,7 @@
             MyDocumentsButton = new Button();
             MyApplicationActiveButton = new Button();
             JobVacanciesButton = new Button();
-            MyProfileButtom = new Button();
+            MyProfileButton = new Button();
             DashboardButton = new Button();
             SelectedJobPanel = new Panel();
             StatusTextBox = new TextBox();
@@ -103,7 +103,7 @@
             NavigationPanel.Controls.Add(MyDocumentsButton);
             NavigationPanel.Controls.Add(MyApplicationActiveButton);
             NavigationPanel.Controls.Add(JobVacanciesButton);
-            NavigationPanel.Controls.Add(MyProfileButtom);
+            NavigationPanel.Controls.Add(MyProfileButton);
             NavigationPanel.Controls.Add(DashboardButton);
             NavigationPanel.Location = new Point(96, 136);
             NavigationPanel.Name = "NavigationPanel";
@@ -137,6 +137,7 @@
             MyDocumentsButton.TabIndex = 4;
             MyDocumentsButton.Text = "My Documents";
             MyDocumentsButton.UseVisualStyleBackColor = false;
+            MyDocumentsButton.Click += MyDocumentsButton_Click;
             // 
             // MyApplicationActiveButton
             // 
@@ -167,20 +168,20 @@
             JobVacanciesButton.UseVisualStyleBackColor = false;
             JobVacanciesButton.Click += JobVacanciesButton_Click;
             // 
-            // MyProfileButtom
+            // MyProfileButton
             // 
-            MyProfileButtom.BackColor = Color.WhiteSmoke;
-            MyProfileButtom.FlatAppearance.BorderColor = Color.Black;
-            MyProfileButtom.FlatAppearance.BorderSize = 2;
-            MyProfileButtom.FlatStyle = FlatStyle.Flat;
-            MyProfileButtom.Font = new Font("Century", 10.2F);
-            MyProfileButtom.Location = new Point(16, 115);
-            MyProfileButtom.Name = "MyProfileButtom";
-            MyProfileButtom.Size = new Size(168, 80);
-            MyProfileButtom.TabIndex = 1;
-            MyProfileButtom.Text = "My Profile";
-            MyProfileButtom.UseVisualStyleBackColor = false;
-            MyProfileButtom.Click += MyProfileButtom_Click;
+            MyProfileButton.BackColor = Color.WhiteSmoke;
+            MyProfileButton.FlatAppearance.BorderColor = Color.Black;
+            MyProfileButton.FlatAppearance.BorderSize = 2;
+            MyProfileButton.FlatStyle = FlatStyle.Flat;
+            MyProfileButton.Font = new Font("Century", 10.2F);
+            MyProfileButton.Location = new Point(16, 115);
+            MyProfileButton.Name = "MyProfileButton";
+            MyProfileButton.Size = new Size(168, 80);
+            MyProfileButton.TabIndex = 1;
+            MyProfileButton.Text = "My Profile";
+            MyProfileButton.UseVisualStyleBackColor = false;
+            MyProfileButton.Click += MyProfileButtom_Click;
             // 
             // DashboardButton
             // 
@@ -531,7 +532,7 @@
         private Label MyApplicationLabel;
         private Panel NavigationPanel;
         private Button DashboardButton;
-        private Button MyProfileButtom;
+        private Button MyProfileButton;
         private Button MyDocumentsButton;
         private Button MyApplicationActiveButton;
         private Button JobVacanciesButton;

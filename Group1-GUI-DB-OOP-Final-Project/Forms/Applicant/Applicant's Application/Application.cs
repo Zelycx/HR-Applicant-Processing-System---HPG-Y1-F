@@ -141,5 +141,13 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Applicant
             jobs.Show();
             Close();
         }
+
+        private void MyDocumentsButton_Click(object sender, EventArgs e)
+        {
+            Group1_GUI_DB_OOP_Final_Project.Forms.Document docs =
+       new Group1_GUI_DB_OOP_Final_Project.Forms.Document(_account);
+            docs.Show();
+            Close();
+        }
     }
 }
