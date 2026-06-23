@@ -12,17 +12,18 @@ namespace Group1_GUI_DB_OOP_Final_Project.Services.HRServices
     internal class InterviewScheduleService
     {
         private readonly InterviewScheduleRepository _repository;
-
         public InterviewScheduleService()
         {
             _repository = new InterviewScheduleRepository();
         }
-
         public InterviewApplicantInfoDTO GetApplicantInfoByApplicationID(int applicationID)
         {
             return _repository.GetApplicantInfoByApplicationID(applicationID);
         }
-
+        public InterviewScheduleInfoDTO GetInterviewScheduleByApplicationID(int applicationID)
+        {
+            return _repository.GetLatestScheduleByApplicationID(applicationID);
+        }
         public bool SaveInterviewSchedule(
             int applicationID,
             int scheduledByUserID,

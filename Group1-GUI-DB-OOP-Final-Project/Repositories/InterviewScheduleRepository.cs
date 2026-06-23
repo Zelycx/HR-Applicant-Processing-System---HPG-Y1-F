@@ -61,6 +61,52 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
             return null;
         }
 
+        // ── READ: latest interview schedule for an application ────────────
+        public InterviewScheduleInfoDTO GetLatestScheduleByApplicationID(int applicationID)
+        {
+            using (MySqlConnection conn = _databaseConnector.GetConnection())
+            {
+                conn.Open();
+
+                string query = @"
+                    SELECT
+                        InterviewScheduleID,
+                        InterviewDate,
+                        InterviewTime,
+                        InterviewerName,
+                        InterviewMode,
+                        InterviewLocation,
+                        Status
+                    FROM interviewschedules
+                    WHERE ApplicationID = @ApplicationID
+                    ORDER BY InterviewScheduleID DESC
+                    LIMIT 1;";
+
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ApplicationID", applicationID);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new InterviewScheduleInfoDTO
+                            {
+                                InterviewScheduleID = Convert.ToInt32(reader["InterviewScheduleID"]),
+                                InterviewDate = Convert.ToDateTime(reader["InterviewDate"]),
+                                InterviewTime = (TimeSpan)reader["InterviewTime"],
+                                InterviewerName = reader["InterviewerName"]?.ToString(),
+                                InterviewMode = reader["InterviewMode"]?.ToString(),
+                                InterviewLocation = reader["InterviewLocation"]?.ToString(),
+                                Status = reader["Status"]?.ToString()
+                            };
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
         // ── SAVE (single transaction: schedule + status update + history) ─
         public bool SaveInterviewSchedule(
             int applicationID,
