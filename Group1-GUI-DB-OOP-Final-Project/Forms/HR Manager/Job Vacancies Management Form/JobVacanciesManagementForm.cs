@@ -1,6 +1,7 @@
 ﻿using Group1_GUI_DB_OOP_Final_Project.Database;
 using Group1_GUI_DB_OOP_Final_Project.DTOs;
 using Group1_GUI_DB_OOP_Final_Project.Forms.HR_Manager.Job_Vacancies_Management_Form.AddOrEdit;
+using Group1_GUI_DB_OOP_Final_Project.Services;
 using Group1_GUI_DB_OOP_Final_Project.Services.HRServices;
 using MySql.Data.MySqlClient;
 using System;
@@ -17,7 +18,17 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR_Manager
 {
     public partial class JobVacanciesManagementForm : Form
     {
+        private void LoadDepartments()
+        {
+            cmbDepartment.DataSource = service.Load("departments");
+            cmbDepartment.DisplayMember = "Name";
+            cmbDepartment.ValueMember = "Id";
+        }
+
+        private DepartmentManagementService service;
+
         DatabaseConnector db = new DatabaseConnector();
+
         private string GetSelectedJobStatus()
         {
             if (dgvVacancies.SelectedRows.Count == 0)
@@ -55,6 +66,10 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR_Manager
         {
             InitializeComponent();
             LoadVacancies();
+
+            string connectionString = "server=localhost;database=your_db;uid=root;pwd=;";
+
+            service = new DepartmentManagementService(connectionString);
         }
 
         private void AddButton_Click(object sender, EventArgs e)
@@ -95,6 +110,7 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR_Manager
             dgvVacancies.MultiSelect = false;
 
             LoadVacancies();
+            LoadDepartments();
         }
     }
 }

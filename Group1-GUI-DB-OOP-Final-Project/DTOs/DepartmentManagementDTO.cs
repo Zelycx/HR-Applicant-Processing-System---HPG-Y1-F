@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Group1_GUI_DB_OOP_Final_Project.DTOs
 {
-    internal class DepartmentManagementDTO
+    public class DepartmentManagementDTO
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }
