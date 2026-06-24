@@ -147,5 +147,82 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.Applicant
             dashboard.Show();
             Close();
         }
+
+        private void ApplyButton_Click_1(object sender, EventArgs e)
+        {
+            if (JobVacanciesGrid.CurrentRow == null)
+            {
+                MessageBox.Show("Please select a job first.");
+                return;
+            }
+
+            JobVacancyListDTO selected =
+                JobVacanciesGrid.CurrentRow.DataBoundItem as JobVacancyListDTO;
+
+            if (selected == null)
+                return;
+
+            DialogResult confirm = MessageBox.Show(
+                "Are you sure you want to apply for this job?",
+                "Confirm Application",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirm == DialogResult.No)
+                return;
+
+            OperationResultDTO result =
+                _service.Apply(_account.ApplicantAccountID, selected.JobVacancyID);
+
+            MessageBox.Show(result.Message);
+
+            if (result.Success)
+            {
+                LoadJobs();
+            }
+        }
+
+        private void DeptCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DeptCB.Items.Clear();
+
+            DeptCB.Items.Add("All");
+            DeptCB.Items.Add("Human Resources");
+            DeptCB.Items.Add("Finance");
+            DeptCB.Items.Add("Information Technology");
+            DeptCB.Items.Add("Marketing");
+            DeptCB.Items.Add("Operations");
+
+            DeptCB.SelectedIndex = 0;
+        }
+
+        private void JobVacanciesGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void EmploymentTypeCB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            EmploymentTypeCB.Items.Clear();
+
+            EmploymentTypeCB.Items.Add("All");
+            EmploymentTypeCB.Items.Add("Full-Time");
+            EmploymentTypeCB.Items.Add("Part-Time");
+            EmploymentTypeCB.Items.Add("Contract");
+            EmploymentTypeCB.Items.Add("Internship");
+
+            EmploymentTypeCB.SelectedIndex = 0;
+        }
+
+        private void ClearButton_Click(object sender, EventArgs e)
+        {
+            SearchBox.Clear();
+
+            DeptCB.SelectedIndex = 0;
+
+            EmploymentTypeCB.SelectedIndex = 0;
+
+            LoadJobs();
+        }
     }
 }
