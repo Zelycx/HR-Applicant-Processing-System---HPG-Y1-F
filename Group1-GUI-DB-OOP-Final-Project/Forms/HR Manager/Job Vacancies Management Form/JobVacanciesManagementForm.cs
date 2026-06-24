@@ -1,6 +1,7 @@
 ﻿using Group1_GUI_DB_OOP_Final_Project.Database;
 using Group1_GUI_DB_OOP_Final_Project.DTOs;
 using Group1_GUI_DB_OOP_Final_Project.Forms.HR_Manager.Job_Vacancies_Management_Form.AddOrEdit;
+using Group1_GUI_DB_OOP_Final_Project.Services;
 using Group1_GUI_DB_OOP_Final_Project.Services.HRServices;
 using MySql.Data.MySqlClient;
 using System;
@@ -17,11 +18,58 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR_Manager
 {
     public partial class JobVacanciesManagementForm : Form
     {
-        private readonly JobVacancyService _service = new JobVacancyService();
+        private void LoadDepartments()
+        {
+            cmbDepartment.DataSource = service.Load("departments");
+            cmbDepartment.DisplayMember = "Name";
+            cmbDepartment.ValueMember = "Id";
+        }
+
+        private DepartmentManagementService service;
+
+        DatabaseConnector db = new DatabaseConnector();
+
+        private string GetSelectedJobStatus()
+        {
+            if (dgvVacancies.SelectedRows.Count == 0)
+                return "";
+
+            var value = dgvVacancies.SelectedRows[0].Cells["Status"].Value;
+
+            if (value == null)
+                return "";
+
+            return value.ToString();
+        }
+
+        private int GetSelectedJobVacancy()
+        {
+            if (dgvVacancies.SelectedRows.Count == 0)
+                return 0;
+
+            var row = dgvVacancies.SelectedRows[0];
+
+            if (row.Cells["JobVacancyID"].Value == null)
+                return 0;
+
+            return Convert.ToInt32(row.Cells["JobVacancyID"].Value);
+        }
+
+        private JobVacancyService _service = new JobVacancyService();
+
+        private void LoadVacancies()
+        {
+            dgvVacancies.DataSource = _service.GetAllVacancies(textBox1.Text);
+        }
 
         public JobVacanciesManagementForm()
         {
             InitializeComponent();
+            LoadVacancies();
+
+            string connectionString = "server=localhost;database=your_db;uid=root;pwd=;";
+
+            service = new DepartmentManagementService(connectionString);
         }
 
         // ════════════════════════════════════════════════════════════
@@ -130,6 +178,7 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR_Manager
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             LoadVacancies();
+            LoadDepartments();
         }
     }
 }

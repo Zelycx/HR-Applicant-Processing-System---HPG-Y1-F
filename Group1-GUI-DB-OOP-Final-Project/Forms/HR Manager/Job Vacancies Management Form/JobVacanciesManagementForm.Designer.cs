@@ -46,7 +46,7 @@
             panel2 = new Panel();
             panel3 = new Panel();
             comboBox2 = new ComboBox();
-            comboBox1 = new ComboBox();
+            cmbDepartment = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dgvVacancies).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -232,7 +232,7 @@
             // 
             panel3.BackColor = Color.White;
             panel3.Controls.Add(comboBox2);
-            panel3.Controls.Add(comboBox1);
+            panel3.Controls.Add(cmbDepartment);
             panel3.Controls.Add(textBox1);
             panel3.Controls.Add(label1);
             panel3.Controls.Add(label2);
@@ -252,14 +252,14 @@
             comboBox2.Size = new Size(309, 23);
             comboBox2.TabIndex = 5;
             // 
-            // comboBox1
+            // cmbDepartment
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(120, 43);
-            comboBox1.Margin = new Padding(3, 2, 3, 2);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(309, 23);
-            comboBox1.TabIndex = 4;
+            cmbDepartment.FormattingEnabled = true;
+            cmbDepartment.Location = new Point(120, 43);
+            cmbDepartment.Margin = new Padding(3, 2, 3, 2);
+            cmbDepartment.Name = "cmbDepartment";
+            cmbDepartment.Size = new Size(309, 23);
+            cmbDepartment.TabIndex = 4;
             // 
             // JobVacanciesManagementForm
             // 
@@ -299,7 +299,7 @@
         private Panel panel2;
         private Panel panel3;
         private ComboBox comboBox2;
-        private ComboBox comboBox1;
+        private ComboBox cmbDepartment;
         private Label label4;
         private DataGridViewTextBoxColumn JobTitle;
         private DataGridViewTextBoxColumn Slots;
