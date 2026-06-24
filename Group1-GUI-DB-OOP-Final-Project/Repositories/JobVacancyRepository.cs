@@ -14,9 +14,13 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
     {
         private readonly DatabaseConnector _db = new DatabaseConnector();
 
+        // ════════════════════════════════════════════════════════════
+        //  APPLICANT-SIDE
+        // ════════════════════════════════════════════════════════════
+
         public List<JobVacancyListDTO> GetOpenJobs(int applicantAccountId, string searchText)
         {
-            List<JobVacancyListDTO> jobs = new List<JobVacancyListDTO>();
+            var jobs = new List<JobVacancyListDTO>();
 
             using (MySqlConnection conn = _db.GetConnection())
             {
@@ -125,7 +129,7 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
                           AND jr.IsRequired = 1
                         ORDER BY rt.RequirementName;";
 
-                    List<string> reqs = new List<string>();
+                    var reqs = new List<string>();
 
                     using (MySqlCommand cmd = new MySqlCommand(reqSql, conn))
                     {
@@ -134,13 +138,13 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
                         using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
-                            {
                                 reqs.Add(reader["RequirementName"].ToString());
-                            }
                         }
                     }
 
-                    job.RequiredDocuments = reqs.Count > 0 ? string.Join(Environment.NewLine, reqs) : "None";
+                    job.RequiredDocuments = reqs.Count > 0
+                        ? string.Join(Environment.NewLine, reqs)
+                        : "None";
                 }
             }
 
@@ -188,7 +192,8 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
                         }
 
                         int applicationId = InsertApplication(conn, tx, applicantId, jobVacancyId);
-                        InsertStatusHistory(conn, tx, applicationId, null, "Submitted", null, "Applicant submitted the application.");
+                        InsertStatusHistory(conn, tx, applicationId, null, "Submitted", null,
+                            "Applicant submitted the application.");
 
                         tx.Commit();
 
@@ -211,9 +216,14 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
             }
         }
 
+        // ════════════════════════════════════════════════════════════
+        //  PRIVATE HELPERS (used by Apply)
+        // ════════════════════════════════════════════════════════════
+
         private int GetApplicantId(MySqlConnection conn, MySqlTransaction tx, int applicantAccountId)
         {
-            string sql = "SELECT ApplicantID FROM applicants WHERE ApplicantAccountID = @ApplicantAccountID LIMIT 1;";
+            string sql = @"SELECT ApplicantID FROM applicants
+                           WHERE ApplicantAccountID = @ApplicantAccountID LIMIT 1;";
 
             using (MySqlCommand cmd = new MySqlCommand(sql, conn, tx))
             {
@@ -225,7 +235,8 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
 
         private bool IsJobOpen(MySqlConnection conn, MySqlTransaction tx, int jobVacancyId)
         {
-            string sql = "SELECT Status FROM jobvacancies WHERE JobVacancyID = @JobVacancyID LIMIT 1;";
+            string sql = @"SELECT Status FROM jobvacancies
+                           WHERE JobVacancyID = @JobVacancyID LIMIT 1;";
 
             using (MySqlCommand cmd = new MySqlCommand(sql, conn, tx))
             {
@@ -235,12 +246,12 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
             }
         }
 
-        private bool HasDuplicateApplication(MySqlConnection conn, MySqlTransaction tx, int applicantId, int jobVacancyId)
+        private bool HasDuplicateApplication(MySqlConnection conn, MySqlTransaction tx,
+            int applicantId, int jobVacancyId)
         {
             string sql = @"
-                SELECT ApplicationID
-                FROM applications
-                WHERE ApplicantID = @ApplicantID
+                SELECT ApplicationID FROM applications
+                WHERE ApplicantID  = @ApplicantID
                   AND JobVacancyID = @JobVacancyID
                 LIMIT 1;";
 
@@ -248,16 +259,18 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
             {
                 cmd.Parameters.AddWithValue("@ApplicantID", applicantId);
                 cmd.Parameters.AddWithValue("@JobVacancyID", jobVacancyId);
-                object result = cmd.ExecuteScalar();
-                return result != null;
+                return cmd.ExecuteScalar() != null;
             }
         }
 
-        private int InsertApplication(MySqlConnection conn, MySqlTransaction tx, int applicantId, int jobVacancyId)
+        private int InsertApplication(MySqlConnection conn, MySqlTransaction tx,
+            int applicantId, int jobVacancyId)
         {
             string sql = @"
-                INSERT INTO applications (ApplicantID, JobVacancyID, ApplicationDate, CurrentStatus, IsLocked)
-                VALUES (@ApplicantID, @JobVacancyID, NOW(), 'Submitted', 0);
+                INSERT INTO applications
+                    (ApplicantID, JobVacancyID, ApplicationDate, CurrentStatus, IsLocked)
+                VALUES
+                    (@ApplicantID, @JobVacancyID, NOW(), 'Submitted', 0);
                 SELECT LAST_INSERT_ID();";
 
             using (MySqlCommand cmd = new MySqlCommand(sql, conn, tx))
@@ -268,13 +281,15 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
             }
         }
 
-        private void InsertStatusHistory(MySqlConnection conn, MySqlTransaction tx, int applicationId, string oldStatus, string newStatus, int? changedByUserId, string remarks)
+        private void InsertStatusHistory(MySqlConnection conn, MySqlTransaction tx,
+            int applicationId, string oldStatus, string newStatus,
+            int? changedByUserId, string remarks)
         {
             string sql = @"
                 INSERT INTO applicationstatushistory
-                (ApplicationID, OldStatus, NewStatus, ChangedByUserID, Remarks, ChangedAt)
+                    (ApplicationID, OldStatus, NewStatus, ChangedByUserID, Remarks, ChangedAt)
                 VALUES
-                (@ApplicationID, @OldStatus, @NewStatus, @ChangedByUserID, @Remarks, NOW());";
+                    (@ApplicationID, @OldStatus, @NewStatus, @ChangedByUserID, @Remarks, NOW());";
 
             using (MySqlCommand cmd = new MySqlCommand(sql, conn, tx))
             {
@@ -286,26 +301,31 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
                 cmd.ExecuteNonQuery();
             }
         }
+
+        // ════════════════════════════════════════════════════════════
+        //  HR-SIDE: LIST
+        // ════════════════════════════════════════════════════════════
+
         public List<JobVacancyListDTO> GetAllVacancies(string searchText)
         {
-            List<JobVacancyListDTO> jobs = new List<JobVacancyListDTO>();
+            var jobs = new List<JobVacancyListDTO>();
 
             using (MySqlConnection conn = _db.GetConnection())
             {
                 conn.Open();
 
                 string sql = @"
-            SELECT 
-                j.JobVacancyID,
-                j.JobTitle,
-                d.DepartmentName,
-                e.EmploymentTypeName,
-                j.Status
-            FROM jobvacancies j
-            INNER JOIN departments d ON j.DepartmentID = d.DepartmentID
-            INNER JOIN employmenttypes e ON j.EmploymentTypeID = e.EmploymentTypeID
-            WHERE (@SearchText = '' OR j.JobTitle LIKE CONCAT('%', @SearchText, '%'))
-            ORDER BY j.PostedDate DESC;";
+                    SELECT 
+                        j.JobVacancyID,
+                        j.JobTitle,
+                        d.DepartmentName,
+                        e.EmploymentTypeName,
+                        j.Status
+                    FROM jobvacancies j
+                    INNER JOIN departments d ON j.DepartmentID = d.DepartmentID
+                    INNER JOIN employmenttypes e ON j.EmploymentTypeID = e.EmploymentTypeID
+                    WHERE (@SearchText = '' OR j.JobTitle LIKE CONCAT('%', @SearchText, '%'))
+                    ORDER BY j.PostedDate DESC;";
 
                 using (MySqlCommand cmd = new MySqlCommand(sql, conn))
                 {
@@ -330,99 +350,284 @@ namespace Group1_GUI_DB_OOP_Final_Project.Repositories
 
             return jobs;
         }
-        public void UpdateStatus(int jobVacancyId, string status)
+
+        // ════════════════════════════════════════════════════════════
+        //  HR-SIDE: LOOKUPS (for dropdowns / CheckedListBox)
+        // ════════════════════════════════════════════════════════════
+
+        public JobVacancyEditDTO GetVacancyForEdit(int jobVacancyId)
         {
-            using (MySqlConnection conn = _db.GetConnection())
-            {
-                conn.Open();
+            JobVacancyEditDTO job = null;
 
-                string sql = @"UPDATE jobvacancies 
-                       SET Status = @Status 
-                       WHERE JobVacancyID = @JobVacancyID";
-
-                using (MySqlCommand cmd = new MySqlCommand(sql, conn))
-                {
-                    cmd.Parameters.AddWithValue("@Status", status);
-                    cmd.Parameters.AddWithValue("@JobVacancyID", jobVacancyId);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
-        public void AddVacancy(string jobTitle, string jobDescription, string qualifications, int departmentId, int employmentTypeId)
-        {
             using (MySqlConnection conn = _db.GetConnection())
             {
                 conn.Open();
 
                 string sql = @"
-            INSERT INTO jobvacancies
-            (JobTitle, JobDescription, Qualifications, DepartmentID, EmploymentTypeID, Status, PostedDate)
-            VALUES
-            (@JobTitle, @JobDescription, @Qualifications, @DepartmentID, @EmploymentTypeID, 'Open', NOW());";
-
-                using (MySqlCommand cmd = new MySqlCommand(sql, conn))
-                {
-                    cmd.Parameters.AddWithValue("@JobTitle", jobTitle);
-                    cmd.Parameters.AddWithValue("@JobDescription", jobDescription);
-                    cmd.Parameters.AddWithValue("@Qualifications", qualifications);
-                    cmd.Parameters.AddWithValue("@DepartmentID", departmentId);
-                    cmd.Parameters.AddWithValue("@EmploymentTypeID", employmentTypeId);
-
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
-        public void UpdateVacancy(int jobVacancyId, string jobTitle, string jobDescription, string qualifications, int departmentId, int employmentTypeId)
-        {
-            using (MySqlConnection conn = _db.GetConnection())
-            {
-                conn.Open();
-
-                string sql = @"
-            UPDATE jobvacancies
-            SET 
-                JobTitle = @JobTitle,
-                JobDescription = @JobDescription,
-                Qualifications = @Qualifications,
-                DepartmentID = @DepartmentID,
-                EmploymentTypeID = @EmploymentTypeID
-            WHERE JobVacancyID = @JobVacancyID;";
+                    SELECT JobVacancyID, JobTitle, JobDescription, Qualifications,
+                           DepartmentID, EmploymentTypeID
+                    FROM jobvacancies
+                    WHERE JobVacancyID = @JobVacancyID
+                    LIMIT 1;";
 
                 using (MySqlCommand cmd = new MySqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@JobVacancyID", jobVacancyId);
-                    cmd.Parameters.AddWithValue("@JobTitle", jobTitle);
-                    cmd.Parameters.AddWithValue("@JobDescription", jobDescription);
-                    cmd.Parameters.AddWithValue("@Qualifications", qualifications);
-                    cmd.Parameters.AddWithValue("@DepartmentID", departmentId);
-                    cmd.Parameters.AddWithValue("@EmploymentTypeID", employmentTypeId);
 
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            job = new JobVacancyEditDTO
+                            {
+                                JobVacancyID = Convert.ToInt32(reader["JobVacancyID"]),
+                                JobTitle = reader["JobTitle"].ToString(),
+                                JobDescription = reader["JobDescription"]?.ToString() ?? "",
+                                Qualifications = reader["Qualifications"]?.ToString() ?? "",
+                                DepartmentID = Convert.ToInt32(reader["DepartmentID"]),
+                                EmploymentTypeID = Convert.ToInt32(reader["EmploymentTypeID"])
+                            };
+                        }
+                    }
+                }
+
+                if (job != null)
+                {
+                    string reqSql = @"
+                        SELECT RequirementTypeID FROM jobrequirements
+                        WHERE JobVacancyID = @JobVacancyID AND IsRequired = 1;";
+
+                    using (MySqlCommand cmd = new MySqlCommand(reqSql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@JobVacancyID", jobVacancyId);
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                                job.RequirementTypeIDs.Add(Convert.ToInt32(reader["RequirementTypeID"]));
+                        }
+                    }
+                }
+            }
+
+            return job;
+        }
+
+        public List<LookupDTO> GetDepartments()
+        {
+            var list = new List<LookupDTO>();
+
+            using (MySqlConnection conn = _db.GetConnection())
+            {
+                conn.Open();
+                string sql = @"SELECT DepartmentID, DepartmentName
+                               FROM departments ORDER BY DepartmentName;";
+
+                using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                        list.Add(new LookupDTO
+                        {
+                            ID = Convert.ToInt32(reader["DepartmentID"]),
+                            Name = reader["DepartmentName"].ToString()
+                        });
+                }
+            }
+
+            return list;
+        }
+
+        public List<LookupDTO> GetEmploymentTypes()
+        {
+            var list = new List<LookupDTO>();
+
+            using (MySqlConnection conn = _db.GetConnection())
+            {
+                conn.Open();
+                string sql = @"SELECT EmploymentTypeID, EmploymentTypeName
+                               FROM employmenttypes ORDER BY EmploymentTypeName;";
+
+                using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                        list.Add(new LookupDTO
+                        {
+                            ID = Convert.ToInt32(reader["EmploymentTypeID"]),
+                            Name = reader["EmploymentTypeName"].ToString()
+                        });
+                }
+            }
+
+            return list;
+        }
+
+        public List<LookupDTO> GetRequirementTypes()
+        {
+            var list = new List<LookupDTO>();
+
+            using (MySqlConnection conn = _db.GetConnection())
+            {
+                conn.Open();
+                string sql = @"SELECT RequirementTypeID, RequirementName
+                               FROM requirementtypes ORDER BY RequirementName;";
+
+                using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                        list.Add(new LookupDTO
+                        {
+                            ID = Convert.ToInt32(reader["RequirementTypeID"]),
+                            Name = reader["RequirementName"].ToString()
+                        });
+                }
+            }
+
+            return list;
+        }
+
+        // ════════════════════════════════════════════════════════════
+        //  HR-SIDE: SAVE (Add / Update with requirements)
+        // ════════════════════════════════════════════════════════════
+
+        // Wipes and re-inserts jobrequirements inside a transaction
+        private void SaveJobRequirements(MySqlConnection conn, MySqlTransaction tx,
+            int jobVacancyId, List<int> requirementTypeIds)
+        {
+            string deleteSql = @"DELETE FROM jobrequirements WHERE JobVacancyID = @JobVacancyID;";
+            using (MySqlCommand cmd = new MySqlCommand(deleteSql, conn, tx))
+            {
+                cmd.Parameters.AddWithValue("@JobVacancyID", jobVacancyId);
+                cmd.ExecuteNonQuery();
+            }
+
+            foreach (int rtId in requirementTypeIds)
+            {
+                string insertSql = @"
+                    INSERT INTO jobrequirements (JobVacancyID, RequirementTypeID, IsRequired)
+                    VALUES (@JobVacancyID, @RequirementTypeID, 1);";
+
+                using (MySqlCommand cmd = new MySqlCommand(insertSql, conn, tx))
+                {
+                    cmd.Parameters.AddWithValue("@JobVacancyID", jobVacancyId);
+                    cmd.Parameters.AddWithValue("@RequirementTypeID", rtId);
                     cmd.ExecuteNonQuery();
                 }
             }
         }
+
+        public void AddVacancy(string jobTitle, string jobDescription, string qualifications,
+            int departmentId, int employmentTypeId, int createdByUserId,
+            List<int> requirementTypeIds)
+        {
+            using (MySqlConnection conn = _db.GetConnection())
+            {
+                conn.Open();
+                using (MySqlTransaction tx = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        string sql = @"
+                            INSERT INTO jobvacancies
+                                (JobTitle, JobDescription, Qualifications, DepartmentID,
+                                 EmploymentTypeID, Status, PostedDate, CreatedByUserID)
+                            VALUES
+                                (@JobTitle, @JobDescription, @Qualifications, @DepartmentID,
+                                 @EmploymentTypeID, 'Open', NOW(), @CreatedByUserID);
+                            SELECT LAST_INSERT_ID();";
+
+                        int newId;
+                        using (MySqlCommand cmd = new MySqlCommand(sql, conn, tx))
+                        {
+                            cmd.Parameters.AddWithValue("@JobTitle", jobTitle);
+                            cmd.Parameters.AddWithValue("@JobDescription", jobDescription);
+                            cmd.Parameters.AddWithValue("@Qualifications", qualifications);
+                            cmd.Parameters.AddWithValue("@DepartmentID", departmentId);
+                            cmd.Parameters.AddWithValue("@EmploymentTypeID", employmentTypeId);
+                            cmd.Parameters.AddWithValue("@CreatedByUserID", createdByUserId);
+                            newId = Convert.ToInt32(cmd.ExecuteScalar());
+                        }
+
+                        SaveJobRequirements(conn, tx, newId, requirementTypeIds);
+                        tx.Commit();
+                    }
+                    catch
+                    {
+                        try { tx.Rollback(); } catch { }
+                        throw;
+                    }
+                }
+            }
+        }
+
+        public void UpdateVacancy(int jobVacancyId, string jobTitle, string jobDescription,
+            string qualifications, int departmentId, int employmentTypeId,
+            List<int> requirementTypeIds)
+        {
+            using (MySqlConnection conn = _db.GetConnection())
+            {
+                conn.Open();
+                using (MySqlTransaction tx = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        string sql = @"
+                            UPDATE jobvacancies
+                            SET JobTitle         = @JobTitle,
+                                JobDescription   = @JobDescription,
+                                Qualifications   = @Qualifications,
+                                DepartmentID     = @DepartmentID,
+                                EmploymentTypeID = @EmploymentTypeID
+                            WHERE JobVacancyID = @JobVacancyID;";
+
+                        using (MySqlCommand cmd = new MySqlCommand(sql, conn, tx))
+                        {
+                            cmd.Parameters.AddWithValue("@JobVacancyID", jobVacancyId);
+                            cmd.Parameters.AddWithValue("@JobTitle", jobTitle);
+                            cmd.Parameters.AddWithValue("@JobDescription", jobDescription);
+                            cmd.Parameters.AddWithValue("@Qualifications", qualifications);
+                            cmd.Parameters.AddWithValue("@DepartmentID", departmentId);
+                            cmd.Parameters.AddWithValue("@EmploymentTypeID", employmentTypeId);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        SaveJobRequirements(conn, tx, jobVacancyId, requirementTypeIds);
+                        tx.Commit();
+                    }
+                    catch
+                    {
+                        try { tx.Rollback(); } catch { }
+                        throw;
+                    }
+                }
+            }
+        }
+
+        // ════════════════════════════════════════════════════════════
+        //  HR-SIDE: STATUS TOGGLE
+        // ════════════════════════════════════════════════════════════
 
         public void UpdateJobStatus(int jobVacancyId, string status)
         {
             using (MySqlConnection conn = _db.GetConnection())
             {
                 conn.Open();
-
-                string sql = @"
-            UPDATE jobvacancies
-            SET Status = @Status
-            WHERE JobVacancyID = @JobVacancyID;";
+                string sql = @"UPDATE jobvacancies SET Status = @Status
+                               WHERE JobVacancyID = @JobVacancyID;";
 
                 using (MySqlCommand cmd = new MySqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@Status", status);
                     cmd.Parameters.AddWithValue("@JobVacancyID", jobVacancyId);
-
                     cmd.ExecuteNonQuery();
                 }
             }
         }
+
+        // Kept for backward compatibility — delegates to UpdateJobStatus
+        public void UpdateStatus(int jobVacancyId, string status)
+            => UpdateJobStatus(jobVacancyId, status);
     }
 }

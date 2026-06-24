@@ -30,9 +30,7 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR_Staff.Interview_Management
             _scheduleService = new InterviewScheduleService();
             _evaluationService = new InterviewEvaluationService();
 
-            EvaluatorName.Text = SessionManager.CurrentHRUser != null
-                ? $"{SessionManager.CurrentHRUser.Username} - {SessionManager.CurrentHRUser.RoleName}"
-                : "Unknown User";
+            EvaluatorName.Text = SessionManager.CurrentHRUser?.Username ?? "Unknown User";
 
             OverallScore.Text = "--";
 

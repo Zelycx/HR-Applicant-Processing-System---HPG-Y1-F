@@ -1,4 +1,5 @@
 ﻿using Group1_GUI_DB_OOP_Final_Project.Forms.Applicant.Applicant_LogIn;
+using Group1_GUI_DB_OOP_Final_Project.Forms.Administrator;
 using Group1_GUI_DB_OOP_Final_Project.Forms.HR_Manager;
 using Group1_GUI_DB_OOP_Final_Project.Forms.Shared.Confirmation;
 using Group1_GUI_DB_OOP_Final_Project.Services.HRServices;
@@ -114,22 +115,30 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR
 
         private void ReportsButton_Click(object sender, EventArgs e)
         {
-
+            Reports reports = new Reports();
+            reports.Show();
+            this.Close();
         }
 
         private void HiringButton_Click(object sender, EventArgs e)
         {
-
+            HiringDecisionForm hiring = new HiringDecisionForm();
+            hiring.Show();
+            this.Close();
         }
 
         private void UserManagerButton_Click(object sender, EventArgs e)
         {
-
+            UserManagement userManagement = new UserManagement();
+            userManagement.Show();
+            this.Close();
         }
 
         private void MaintenanceButton_Click(object sender, EventArgs e)
         {
-
+            DepartmentManagement departmentManagement = new DepartmentManagement();
+            departmentManagement.Show();
+            this.Close();
         }
 
         private void LogOutButton_Click(object sender, EventArgs e)

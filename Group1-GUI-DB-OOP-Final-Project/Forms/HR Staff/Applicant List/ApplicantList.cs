@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Group1_GUI_DB_OOP_Final_Project.DTOs;
 using Group1_GUI_DB_OOP_Final_Project.Services.HRServices;
+using Group1_GUI_DB_OOP_Final_Project.Services.Session;
 
 namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR
 {
@@ -152,7 +153,8 @@ namespace Group1_GUI_DB_OOP_Final_Project.Forms.HR
             int? id = GetSelectedApplicationID();
             if (id == null) return;
 
-            new InterviewSched(id.Value).Show();
+            int userID = SessionManager.CurrentHRUser?.UserID ?? 0;
+            new InterviewSched(id.Value, userID).Show();
             this.Close();
         }
 
